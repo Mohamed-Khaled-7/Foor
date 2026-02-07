@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:musa/presentation/widget/customCard.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});

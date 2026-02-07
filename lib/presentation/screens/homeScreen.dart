@@ -4,11 +4,10 @@ import 'package:lucide_icons/lucide_icons.dart';
 
 import 'package:musa/data/models/poductModel.dart';
 import 'package:musa/presentation/widget/categoriesList.dart';
-import 'package:musa/presentation/widget/categoryItem.dart';
-import 'package:musa/presentation/widget/customCard.dart';
+
 import 'package:musa/presentation/widget/customHeader.dart';
 import 'package:musa/presentation/widget/customSearchField.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:musa/presentation/widget/customCard.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,7 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
+        physics: AlwaysScrollableScrollPhysics(),
         children: [
           SizedBox(height: 23),
           Row(
@@ -66,6 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomHeader(title: 'Categories'),
           SizedBox(height: 16),
           CategoryList(),
+          SizedBox(height: 23),
+          CustomHeader(title: 'Products'),
+          CustomCard(),
         ],
       ),
     );

@@ -14,7 +14,7 @@ class CustomTextSearch extends StatelessWidget {
           hintText: 'Search',
           hintStyle: GoogleFonts.poppins(color: Colors.black),
           prefixIcon: Icon(LucideIcons.search, color: Colors.black),
-          prefixIconConstraints: BoxConstraints(minWidth: 40, minHeight: 40),
+          prefixIconConstraints: BoxConstraints(minWidth: 48, minHeight: 40),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(44),
             borderSide: BorderSide(color: Color.fromARGB(255, 218, 217, 217)),
