@@ -29,7 +29,7 @@ class Foor extends StatelessWidget {
         RegisterPage.id: (context) => RegisterPage(),
         LoginPage.id: (context) => LoginPage(),
       },
-      initialRoute: 'NavigationView',
+      initialRoute: NavigationView.id,
       debugShowCheckedModeBanner: false,
     );
   }

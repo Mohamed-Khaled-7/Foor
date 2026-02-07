@@ -8,93 +8,73 @@ class CustomCard extends StatefulWidget {
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
+
 class _CustomCardState extends State<CustomCard> {
   bool isFavorit = false;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.only(left: 16.0, top: 24, right: 18),
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              height: 130,
-              width: 180,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 40,
-                    color: Colors.grey.withOpacity(0.1),
-                    offset: Offset(1, 1),
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              child: Card(
-                clipBehavior: Clip.none,
-                color: Colors.white,
-                elevation: 6,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 1,
-                    horizontal: 6,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: Text(
-                          'Title',
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: .0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Price',
-                              style: GoogleFonts.montserrat(fontSize: 16),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isFavorit = !isFavorit;
-                                });
-                              },
-                              icon: isFavorit
-                                  ? Icon(Icons.favorite, color: Colors.red)
-                                  : Icon(LucideIcons.heart, color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+    return Padding(
+      padding: const EdgeInsets.all(11.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(0.05),
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/secondOnBoard.png',
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              left: 0,
-              top: 12,
-              bottom: 122,
-              right: 120,
-              child: Image.asset(
-                'assets/images/secondOnBoard.png',
-                height: 22,
-                color: Colors.green,
+              const SizedBox(height: 12),
+              Text(
+                'Title',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.poppins(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Price',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => setState(() => isFavorit = !isFavorit),
+                    child: Icon(
+                      isFavorit ? Icons.favorite : LucideIcons.heart,
+                      color: isFavorit ? Colors.red : Colors.grey,
+                      size: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

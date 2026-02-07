@@ -9,6 +9,7 @@ import 'package:musa/presentation/widget/customAppBar.dart';
 import 'package:musa/presentation/widget/customHeader.dart';
 import 'package:musa/presentation/widget/customSearchField.dart';
 import 'package:musa/presentation/widget/customCard.dart';
+import 'package:musa/presentation/widget/custom_list_products.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,18 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: CustomAppBar(),
       body: ListView(
-        physics: AlwaysScrollableScrollPhysics(),
         children: [
-          SizedBox(height: 23),
-          SizedBox(height: 23),
+          //SizedBox(height: 23),
           CustomTextSearch(),
           SizedBox(height: 18),
-          CustomHeader(title: 'Categories'),
+          CustomHeader(title: 'Categorie'),
           SizedBox(height: 16),
           CategoryList(),
           SizedBox(height: 23),
           CustomHeader(title: 'Products'),
-          CustomCard(),
+          CustomListProducts(),
         ],
       ),
     );
