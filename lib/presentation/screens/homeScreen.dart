@@ -4,6 +4,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 
 import 'package:musa/data/models/poductModel.dart';
 import 'package:musa/presentation/widget/categoriesList.dart';
+import 'package:musa/presentation/widget/customAppBar.dart';
 
 import 'package:musa/presentation/widget/customHeader.dart';
 import 'package:musa/presentation/widget/customSearchField.dart';
@@ -21,45 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(),
       body: ListView(
         physics: AlwaysScrollableScrollPhysics(),
         children: [
           SizedBox(height: 23),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                        'https://i.pravatar.cc/150?img=3',
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      'Hello, Mohamed!',
-                      style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 95),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(LucideIcons.shoppingBag, color: Colors.black87),
-                ),
-              ),
-            ],
-          ),
           SizedBox(height: 23),
           CustomTextSearch(),
           SizedBox(height: 18),

@@ -25,12 +25,7 @@ class _NavigationViewState extends State<NavigationView> {
   ];
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white,
-
-      // appBar: AppBar(
-      //   title: const Text('Home Page', style: TextStyle(color: Colors.white)),
-      //   backgroundColor: Colors.white,
-      // ),
+      
       bottomNavigationBar: BottomNavigationBar(
         selectedLabelStyle: GoogleFonts.poppins(fontSize: 18),
         selectedItemColor: Colors.black,

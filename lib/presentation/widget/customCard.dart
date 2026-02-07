@@ -8,7 +8,6 @@ class CustomCard extends StatefulWidget {
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
-
 class _CustomCardState extends State<CustomCard> {
   bool isFavorit = false;
   @override
