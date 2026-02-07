@@ -12,11 +12,11 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(Musa());
+  runApp(Foor());
 }
 
-class Musa extends StatelessWidget {
-  Musa({Key? key}) : super(key: key);
+class Foor extends StatelessWidget {
+  Foor({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

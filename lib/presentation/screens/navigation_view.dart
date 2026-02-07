@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/presentation/screens/HomeScreen.dart';
 import 'package:musa/presentation/screens/favoritScreen.dart';
@@ -7,25 +8,32 @@ import 'package:musa/presentation/screens/search_view.dart';
 
 class NavigationView extends StatefulWidget {
   NavigationView({super.key});
-  static String id = 'NavigationScreen';
+  static String id = 'NavigationView';
 
   @override
-  State<NavigationView> createState() => _HomeScreenState();
+  State<NavigationView> createState() => _NavigationViewState();
 }
-class _HomeScreenState extends State<NavigationView> {
+
+class _NavigationViewState extends State<NavigationView> {
   int currentIndex = 0;
   @override
-  List<Widget> listWidget = [HomeScreen(), SearchView(),FavoritesPage(), ProfilePage()];
+  List<Widget> listWidget = [
+    HomeScreen(),
+    SearchView(),
+    FavoritesPage(),
+    ProfilePage(),
+  ];
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
 
       // appBar: AppBar(
       //   title: const Text('Home Page', style: TextStyle(color: Colors.white)),
       //   backgroundColor: Colors.white,
       // ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
+        selectedLabelStyle: GoogleFonts.poppins(fontSize: 18),
+        selectedItemColor: Colors.black,
         currentIndex: currentIndex,
         onTap: (val) {
           setState(() {
@@ -33,20 +41,22 @@ class _HomeScreenState extends State<NavigationView> {
           });
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(LucideIcons.home), label: "Home"),
           BottomNavigationBarItem(
-            icon: Icon(LucideIcons.search),
-            label: "Search",
+            icon: Icon(LucideIcons.home, color: Colors.black54),
+            label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(LucideIcons.heart),
-            label: "Wishlist",
+            icon: Icon(LucideIcons.heart, color: Colors.black54),
+            label: "Favoriates",
           ),
           BottomNavigationBarItem(
-            icon: Icon(LucideIcons.user),
-            label: "Profile",
+            icon: Icon(LucideIcons.shoppingCart, color: Colors.black54),
+            label: "Cart",
           ),
-          
+          BottomNavigationBarItem(
+            icon: Icon(LucideIcons.user, color: Colors.black54),
+            label: "You",
+          ),
         ],
       ),
       body: listWidget[currentIndex],
