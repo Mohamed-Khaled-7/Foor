@@ -3,7 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import 'package:musa/data/models/poductModel.dart';
+import 'package:musa/presentation/widget/categoriesList.dart';
+import 'package:musa/presentation/widget/categoryItem.dart';
 import 'package:musa/presentation/widget/customCard.dart';
+import 'package:musa/presentation/widget/customHeader.dart';
 import 'package:musa/presentation/widget/customSearchField.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -17,8 +20,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Productmodel>> products;
   @override
-  
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -59,7 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          SizedBox(height: 23),
           CustomTextSearch(),
+          SizedBox(height: 18),
+          CustomHeader(title: 'Categories'),
+          SizedBox(height: 16),
+          CategoryList(),
         ],
       ),
     );
