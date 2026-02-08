@@ -16,8 +16,6 @@ class Api {
         throw Exception('Unexpected status code: ${response.statusCode}');
       }
     } on DioException catch (e) {
-
-
      return 'Failed to load data status code: ${e.response?.statusCode} - ${e.message}';
     }
   }
