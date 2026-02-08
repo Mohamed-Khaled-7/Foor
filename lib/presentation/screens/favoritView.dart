@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class FavoritesView extends StatelessWidget {
   const FavoritesView({super.key});
@@ -7,18 +8,17 @@ class FavoritesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black54,
       appBar: AppBar(
+        automaticallyImplyLeading: true,
+        actions: [IconButton(onPressed: () {}, icon: Icon(LucideIcons.heart))],
         title: Text(
           'Favoriates Page',
-          style: TextStyle(fontSize: 30, color: Colors.white),
+          style: GoogleFonts.poppins(fontSize: 30, color: Colors.black),
         ),
       ),
-      body:Center(
-        child: Text('No items in your card!',style: GoogleFonts.poppins(
-          fontSize: 23
-        ),),
-      )
+      body: Center(
+        child: Text('No Favoriates!', style: GoogleFonts.poppins(fontSize: 23)),
+      ),
     );
   }
 }

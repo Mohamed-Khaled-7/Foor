@@ -8,7 +8,7 @@ import 'package:musa/presentation/screens/search_view.dart';
 import 'package:musa/presentation/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:musa/presentation/screens/bageView.dart';
+import 'package:musa/presentation/screens/cart_view.dart';
 import 'package:musa/presentation/widget/custom_product_details.dart';
 
 void main() async {
@@ -24,14 +24,14 @@ class Foor extends StatelessWidget {
     return MaterialApp(
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
-        BageView.id: (context) => BageView(),
+        CartView.id: (context) => CartView(),
         SearchView.id: (context) => SearchView(),
         SplashScreen.id: (context) => SplashScreen(),
         NavigationView.id: (context) => NavigationView(),
         OnBoardingScreen.id: (context) => OnBoardingScreen(),
         RegisterPage.id: (context) => RegisterPage(),
         LoginPage.id: (context) => LoginPage(),
-        CustomProductDetails.id:(context)=> CustomProductDetails()
+        CustomProductDetails.id: (context) => CustomProductDetails(),
       },
       initialRoute: NavigationView.id,
       debugShowCheckedModeBanner: false,

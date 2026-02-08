@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/presentation/screens/HomeScreen.dart';
+import 'package:musa/presentation/screens/cart_view.dart';
 import 'package:musa/presentation/screens/favoritView.dart';
 import 'package:musa/presentation/screens/profileScreen.dart';
 import 'package:musa/presentation/screens/search_view.dart';
@@ -19,8 +20,9 @@ class _NavigationViewState extends State<NavigationView> {
   @override
   List<Widget> listWidget = [
     HomeScreen(),
-    SearchView(),
+
     FavoritesView(),
+    CartView(),
     ProfilePage(),
   ];
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _NavigationViewState extends State<NavigationView> {
             label: "Favoriates",
           ),
           BottomNavigationBarItem(
-            icon: Icon(LucideIcons.shoppingCart, color: Colors.black54),
+            icon: Icon(LucideIcons.shoppingBag, color: Colors.black54),
             label: "Cart",
           ),
           BottomNavigationBarItem(
