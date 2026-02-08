@@ -49,6 +49,7 @@ dependencies:
   persistent_bottom_nav_bar_v2: ^6.2.0
   http: ^1.6.0
   flutter_bloc: ^9.1.1
+  dio: ^5.9.1
 
 dev_dependencies:
   flutter_test:
