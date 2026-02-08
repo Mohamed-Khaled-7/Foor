@@ -24,17 +24,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: ListView(
+      body: Column(
         children: [
-          //SizedBox(height: 23),
           CustomTextSearch(),
-          SizedBox(height: 18),
-          CustomHeader(title: 'Categorie'),
-          SizedBox(height: 16),
-          CategoryList(),
-          SizedBox(height: 23),
-          CustomHeader(title: 'Products'),
-          CustomListProducts(),
+          Expanded(
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                SizedBox(height: 18),
+                CustomHeader(title: 'Categorie'),
+                SizedBox(height: 16),
+                CategoryList(),
+                SizedBox(height: 23),
+                CustomHeader(title: 'Products'),
+                CustomListProducts(),
+              ],
+            ),
+          ),
         ],
       ),
     );

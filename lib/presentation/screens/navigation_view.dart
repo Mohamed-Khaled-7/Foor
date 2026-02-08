@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/presentation/screens/HomeScreen.dart';
-import 'package:musa/presentation/screens/favoritScreen.dart';
+import 'package:musa/presentation/screens/favoritView.dart';
 import 'package:musa/presentation/screens/profileScreen.dart';
 import 'package:musa/presentation/screens/search_view.dart';
 
@@ -20,12 +20,11 @@ class _NavigationViewState extends State<NavigationView> {
   List<Widget> listWidget = [
     HomeScreen(),
     SearchView(),
-    FavoritesPage(),
+    FavoritesView(),
     ProfilePage(),
   ];
   Widget build(BuildContext context) {
     return Scaffold(
-      
       bottomNavigationBar: BottomNavigationBar(
         selectedLabelStyle: GoogleFonts.poppins(fontSize: 18),
         selectedItemColor: Colors.black,
