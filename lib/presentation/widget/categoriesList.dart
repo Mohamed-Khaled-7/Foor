@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:musa/business_logic/cubit/categories_cubit.dart';
 import 'package:musa/presentation/widget/categoryItem.dart';
 
 class CategoryList extends StatelessWidget {
@@ -6,21 +8,34 @@ class CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 120,
-      child: ListView.builder(
-        itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.only(
-            right: 10,
-            left: 10,
-            top: 10,
-            bottom: 10,
-          ),
-          child: CategoryItem(),
-        ),
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-      ),
+    return BlocBuilder<CategoriesCubit, CategoriesState>(
+      builder: (context, state) {
+        if (state is CategoriesLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Color.fromARGB(255, 23, 51, 214),
+            ),
+          );
+        } else if (state is CategoriesLoaded) {
+          return SizedBox(
+            height: 130,
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: CategoryItem(categoryModel: state.categories[index]),
+                );
+              },
+              scrollDirection: Axis.horizontal,
+              itemCount: state.categories.length,
+            ),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(color: Colors.blueAccent),
+          );
+        }
+      },
     );
   }
 }

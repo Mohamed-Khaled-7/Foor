@@ -91,7 +91,19 @@ class _CustomProductDetailsState extends State<CustomProductDetails> {
                           'Details for Product it will be displayed here',
                           style: GoogleFonts.montserrat(fontSize: 17),
                         ),
-                        SizedBox(height: 55),
+                        SizedBox(height: 48),
+                        Align(
+                          alignment: AlignmentGeometry.centerLeft,
+                          child: Text(
+                            'Brand: Nike',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 8),
+
                         Row(
                           children: [
                             Text(
@@ -145,7 +157,7 @@ class _CustomProductDetailsState extends State<CustomProductDetails> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 55),
+
                         Align(
                           alignment: AlignmentGeometry.centerLeft,
                           child: Text(
@@ -157,17 +169,27 @@ class _CustomProductDetailsState extends State<CustomProductDetails> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 44),
+
                         Row(
                           children: [
                             Align(
                               alignment: AlignmentGeometry.centerLeft,
-                              child: Text(
-                                '\$234',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 34,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    color: Colors.amber,
+                                    height: 50,
+                                    width: 50,
+                                  ),
+                                  Text(
+                                    '\$234',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 34,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             SizedBox(width: 111),

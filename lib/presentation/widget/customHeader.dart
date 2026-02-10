@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomHeader extends StatelessWidget {
   CustomHeader({super.key, required this.title});
-  String title;
+  final title;
   @override
   Widget build(BuildContext context) {
     return Padding(

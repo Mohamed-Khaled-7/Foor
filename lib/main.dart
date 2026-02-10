@@ -1,3 +1,5 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:musa/business_logic/cubit/categories_cubit.dart';
 import 'package:musa/firebase_options.dart';
 import 'package:musa/presentation/screens/homeScreen.dart';
 import 'package:musa/presentation/screens/navigation_view.dart';
@@ -9,14 +11,13 @@ import 'package:musa/presentation/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:musa/presentation/screens/cart_view.dart';
-import 'package:musa/presentation/widget/custom_product_details.dart';
+import 'package:musa/presentation/screens/product_details.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(Foor());
 }
-
 class Foor extends StatelessWidget {
   Foor({Key? key}) : super(key: key);
   @override
