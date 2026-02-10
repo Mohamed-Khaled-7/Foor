@@ -1,9 +1,8 @@
 import 'package:musa/data/helper/api.dart';
-import 'package:musa/data/models/prooduct_model.dart';
 
 class GetAllProductsServics {
- Future<List<dynamic>> getAllProducts() async{
-    List<dynamic>producats=await Api().get(url:'');
+  Future<List<dynamic>> getAllProducts({required String url}) async {
+    List<dynamic> producats = await Api().get(url: url);
     return producats;
   }
 }
