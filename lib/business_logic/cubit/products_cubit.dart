@@ -10,10 +10,15 @@ class ProductsCubit extends Cubit<ProductsState> {
   GetAllProductsRepo repo;
   List<ProductModel> products = [];
   List<ProductModel> getAllProducts({required String url}) {
-    repo.getAllProductsRepository(url: url).then((products) {
-      emit(ProductsLoaded(products: products));
-      this.products = products;
-    });
-    return products;
+    try {
+      repo.getAllProductsRepository(url: url).then((products) {
+        emit(ProductsLoaded(products: products));
+        this.products = products;
+      });
+      return products;
+    } on Exception catch (e) {
+      emit(ProductsError(errMessage: e.toString()));
+      return [];
+    }
   }
 }

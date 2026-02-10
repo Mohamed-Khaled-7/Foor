@@ -9,3 +9,7 @@ class ProductsLoaded extends ProductsState {
   final List<ProductModel> products;
   ProductsLoaded({required this.products});
 }
+class ProductsError extends ProductsState {
+  final String errMessage;
+  ProductsError({required this.errMessage});
+}

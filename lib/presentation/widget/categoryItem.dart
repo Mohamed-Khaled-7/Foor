@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musa/business_logic/cubit/categories_cubit.dart';
+import 'package:musa/business_logic/cubit/products_cubit.dart';
 import 'package:musa/data/models/category_model.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -12,7 +13,9 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        context.read<ProductsCubit>().getAllProducts(url: categoryModel.url);
+      },
       child: Padding(
         padding: const EdgeInsets.only(left: 14),
         child: Column(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:musa/data/models/prooduct_model.dart';
 
 class CustomCard extends StatefulWidget {
-  CustomCard({Key? key}) : super(key: key);
-
+  CustomCard({Key? key,required this.product}) : super(key: key);
+  ProductModel product;
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
@@ -40,14 +41,14 @@ class _CustomCardState extends State<CustomCard> {
                 Expanded(
                   child: Center(
                     child: Image.asset(
-                      'assets/images/secondOnBoard.png',
+                      widget.product.thumbnail,
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Title',
+                  widget.product.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
@@ -60,7 +61,7 @@ class _CustomCardState extends State<CustomCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Price',
+                      widget.product.price.toString(),
                       style: GoogleFonts.montserrat(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
