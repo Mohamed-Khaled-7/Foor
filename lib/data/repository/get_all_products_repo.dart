@@ -1,4 +1,4 @@
-import 'package:musa/data/models/prooduct_model.dart';
+import 'package:musa/data/models/product_model.dart';
 import 'package:musa/data/services/get_all_products.dart';
 
 class GetAllProductsRepo {

@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musa/business_logic/cubit/categories_cubit.dart';
 import 'package:musa/business_logic/cubit/products_cubit.dart';
+import 'package:musa/const/const.dart';
 import 'package:musa/data/repository/get_all_categories_repo.dart';
 import 'package:musa/data/repository/get_all_products_repo.dart';
 import 'package:musa/data/services/get_all_categories.dart';
@@ -14,17 +17,19 @@ import 'package:musa/presentation/screens/loginPage.dart';
 import 'package:musa/presentation/screens/onBoardingScreen.dart';
 import 'package:musa/presentation/screens/search_view.dart';
 import 'package:musa/presentation/screens/splashScreen.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:musa/presentation/screens/cart_view.dart';
 import 'package:musa/presentation/screens/product_details.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  await Hive.openBox(FavoritesBox);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(Foor());
 }
-
 final categoryService = GetAllCategoriesServices();
 final categoryRepository = CategoriesRepository(
   getAllCategoriesServices: categoryService,
@@ -33,7 +38,6 @@ final productServics = GetAllProductsServics();
 final productRepository = GetAllProductsRepo(
   getAllProductsServics: productServics,
 );
-
 class Foor extends StatelessWidget {
   Foor({Key? key}) : super(key: key);
   @override
@@ -41,15 +45,11 @@ class Foor extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => CategoriesCubit(
-            categoriesRepository:categoryRepository
-          ),
+          create: (context) =>
+              CategoriesCubit(categoriesRepository: categoryRepository),
         ),
-
         BlocProvider(
-          create: (context) => ProductsCubit(
-            repo: productRepository
-          ),
+          create: (context) => ProductsCubit(repo: productRepository),
         ),
       ],
       child: MaterialApp(

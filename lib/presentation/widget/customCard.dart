@@ -1,17 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:musa/data/models/prooduct_model.dart';
+import 'package:musa/data/models/product_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CustomCard extends StatefulWidget {
-  CustomCard({Key? key,required this.product}) : super(key: key);
+  CustomCard({Key? key, required this.product}) : super(key: key);
   ProductModel product;
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
 
 class _CustomCardState extends State<CustomCard> {
-  bool isFavorit = false;
+  bool isFav = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,11 @@ class _CustomCardState extends State<CustomCard> {
       padding: const EdgeInsets.all(11.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, 'CustomProductDetails');
+          Navigator.pushNamed(
+            context,
+            'CustomProductDetails',
+            arguments: widget.product,
+          );
         },
         child: Container(
           decoration: BoxDecoration(
@@ -38,11 +44,39 @@ class _CustomCardState extends State<CustomCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  height: 25,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 3, right: 4),
+                    child: Text(
+                      '${widget.product.discountPercentage}%',
+                      style: GoogleFonts.poppins(),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.yellow,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 Expanded(
                   child: Center(
-                    child: Image.asset(
-                      widget.product.thumbnail,
-                      fit: BoxFit.contain,
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          height: 220,
+                          width: 170,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.broken_image),
+                      fit: BoxFit.cover,
+                      imageUrl: '${widget.product.thumbnail}',
                     ),
                   ),
                 ),
@@ -61,7 +95,7 @@ class _CustomCardState extends State<CustomCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.product.price.toString(),
+                      '\$${widget.product.price.toString()}',
                       style: GoogleFonts.montserrat(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -69,10 +103,10 @@ class _CustomCardState extends State<CustomCard> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => setState(() => isFavorit = !isFavorit),
+                      onTap: () => setState(() => isFav = !isFav),
                       child: Icon(
-                        isFavorit ? Icons.favorite : LucideIcons.heart,
-                        color: isFavorit ? Colors.red : Colors.grey,
+                        isFav ? Icons.favorite : LucideIcons.heart,
+                        color: isFav ? Colors.red : Colors.grey,
                         size: 20,
                       ),
                     ),

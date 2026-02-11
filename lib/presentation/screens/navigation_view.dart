@@ -20,7 +20,6 @@ class _NavigationViewState extends State<NavigationView> {
   @override
   List<Widget> listWidget = [
     HomeScreen(),
-
     FavoritesView(),
     CartView(),
     ProfilePage(),
