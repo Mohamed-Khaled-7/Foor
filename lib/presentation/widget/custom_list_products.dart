@@ -37,7 +37,9 @@ class CustomListProducts extends StatelessWidget {
         } else {
           return Shimmer(
             child: Container(height: 120, width: 90),
-            gradient: const LinearGradient(colors: [Colors.grey]),
+            gradient: const LinearGradient(
+              colors: [Colors.grey, Colors.white24],
+            ),
           );
         }
       },

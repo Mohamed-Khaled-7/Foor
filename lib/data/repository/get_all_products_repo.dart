@@ -1,5 +1,5 @@
 import 'package:musa/data/models/product_model.dart';
-import 'package:musa/data/services/get_all_products.dart';
+import 'package:musa/data/datasource/remote/services/get_all_products.dart';
 
 class GetAllProductsRepo {
   GetAllProductsServics getAllProductsServics;

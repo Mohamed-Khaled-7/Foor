@@ -1,5 +1,5 @@
 import 'package:musa/data/models/category_model.dart';
-import 'package:musa/data/services/get_all_categories.dart';
+import 'package:musa/data/datasource/remote/services/get_all_categories.dart';
 
 class CategoriesRepository {
   final GetAllCategoriesServices getAllCategoriesServices;

@@ -1,14 +1,19 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:musa/business_logic/cubit/cart_cubit.dart';
 import 'package:musa/business_logic/cubit/categories_cubit.dart';
+import 'package:musa/business_logic/cubit/favoriate_cubit.dart';
 import 'package:musa/business_logic/cubit/products_cubit.dart';
 import 'package:musa/const/const.dart';
+import 'package:musa/data/datasource/local/cart_local_datasource.dart';
+import 'package:musa/data/datasource/local/favoriate_local_datasoure.dart';
+import 'package:musa/data/models/product_model.dart';
+import 'package:musa/data/repository/cart_repository.dart';
+import 'package:musa/data/repository/favoriate_repository.dart';
 import 'package:musa/data/repository/get_all_categories_repo.dart';
 import 'package:musa/data/repository/get_all_products_repo.dart';
-import 'package:musa/data/services/get_all_categories.dart';
-import 'package:musa/data/services/get_all_products.dart';
+import 'package:musa/data/datasource/remote/services/get_all_categories.dart';
+import 'package:musa/data/datasource/remote/services/get_all_products.dart';
 import 'package:musa/firebase_options.dart';
 import 'package:musa/presentation/screens/homeScreen.dart';
 import 'package:musa/presentation/screens/navigation_view.dart';
@@ -26,10 +31,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-  await Hive.openBox(FavoritesBox);
+  Hive.registerAdapter(ProductModelAdapter());
+  await Hive.openBox<ProductModel>(FavoritesBox);
+  await Hive.openBox<ProductModel>(CartBox);
+  await Hive.openBox(ProfileBox);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(Foor());
 }
+
 final categoryService = GetAllCategoriesServices();
 final categoryRepository = CategoriesRepository(
   getAllCategoriesServices: categoryService,
@@ -38,6 +47,15 @@ final productServics = GetAllProductsServics();
 final productRepository = GetAllProductsRepo(
   getAllProductsServics: productServics,
 );
+final favoriateCubit = FavoriateCubit(
+  favoriateRepository: FavoriateRepository(
+    favoriateLocalDatasoure: FavoriateLocalDatasoure(),
+  ),
+);
+final cartcubit = CartCubit(
+  cartRepository: CartRepository(cartDataSource: CartLocalDataSource()),
+);
+
 class Foor extends StatelessWidget {
   Foor({Key? key}) : super(key: key);
   @override
@@ -51,6 +69,8 @@ class Foor extends StatelessWidget {
         BlocProvider(
           create: (context) => ProductsCubit(repo: productRepository),
         ),
+        BlocProvider(create: (context) => cartcubit),
+        BlocProvider(create: (context) => favoriateCubit),
       ],
       child: MaterialApp(
         routes: {

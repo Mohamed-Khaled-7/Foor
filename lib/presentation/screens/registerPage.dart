@@ -189,6 +189,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   width: double.infinity,
                   height: 55,
                   child: CustomButton(
+                    color: 0xFF4C6FFF,
                     text: 'Create account',
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {

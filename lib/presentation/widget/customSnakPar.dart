@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void CustomSnakPar({
   required BuildContext context,
@@ -17,7 +18,7 @@ void CustomSnakPar({
             child: Expanded(
               child: Text(
                 message,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
@@ -32,7 +33,7 @@ void CustomSnakPar({
       elevation: 10,
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
       shape: StadiumBorder(),
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 1),
     ),
   );
 }

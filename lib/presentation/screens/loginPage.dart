@@ -176,6 +176,7 @@ class _LoginPagejState extends State<LoginPage> {
                     width: double.infinity,
                     height: 55,
                     child: CustomButton(
+                      color: 0xFF4C6FFF,
                       text: 'Login',
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {

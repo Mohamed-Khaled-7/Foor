@@ -1,8 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:musa/business_logic/cubit/favoriate_cubit.dart';
+import 'package:musa/const/const.dart';
 import 'package:musa/data/models/product_model.dart';
+import 'package:musa/data/repository/favoriate_repository.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomCard extends StatefulWidget {
@@ -13,10 +19,11 @@ class CustomCard extends StatefulWidget {
 }
 
 class _CustomCardState extends State<CustomCard> {
-  bool isFav = false;
+  
 
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: const EdgeInsets.all(11.0),
       child: GestureDetector(
@@ -45,12 +52,17 @@ class _CustomCardState extends State<CustomCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 25,
+                  height: 28,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 3, right: 4),
+                    padding: const EdgeInsets.only(
+                      left: 3,
+                      right: 4,
+                      top: 3,
+                      bottom: 4,
+                    ),
                     child: Text(
                       '${widget.product.discountPercentage}%',
-                      style: GoogleFonts.poppins(),
+                      style: GoogleFonts.poppins(fontSize: 17),
                     ),
                   ),
                   decoration: BoxDecoration(
@@ -58,7 +70,8 @@ class _CustomCardState extends State<CustomCard> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                Expanded(
+                SizedBox(
+                  height: 85,
                   child: Center(
                     child: CachedNetworkImage(
                       placeholder: (context, url) => Shimmer.fromColors(
@@ -102,13 +115,19 @@ class _CustomCardState extends State<CustomCard> {
                         color: Colors.black54,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => setState(() => isFav = !isFav),
-                      child: Icon(
-                        isFav ? Icons.favorite : LucideIcons.heart,
-                        color: isFav ? Colors.red : Colors.grey,
-                        size: 20,
-                      ),
+                   BlocBuilder<FavoriateCubit, FavoriateState>(
+                      
+                      builder: (context,state) {
+                       var isFav =context.read<FavoriateCubit>().isFav(widget.product);
+                        return GestureDetector(
+                          onTap: () =>
+                              context.read<FavoriateCubit>().addOrRemoveFav(widget.product),
+                          child: Icon(
+                            isFav ? Icons.favorite : LucideIcons.heart,
+                            color: isFav ? Colors.red : Colors.grey,
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

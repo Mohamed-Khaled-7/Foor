@@ -20,8 +20,10 @@ class ProductModel extends HiveObject {
   final double discountPercentage;
   @HiveField(7)
   final String description;
-
+  @HiveField(8)
+   int quantity;
   ProductModel({
+    this.quantity=1,
     required this.description,
     required this.discountPercentage,
     required this.id,

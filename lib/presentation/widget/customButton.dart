@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -5,8 +6,14 @@ import 'package:lucide_icons/lucide_icons.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   VoidCallback? onPressed;
+  int color;
 
-  CustomButton({super.key, required this.text, required this.onPressed});
+  CustomButton({
+    Key? key,
+    required this.text,
+    this.onPressed,
+    required this.color,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +21,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF4C6FFF),
+          backgroundColor: Color(color),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
@@ -22,10 +29,7 @@ class CustomButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Icon(
-              LucideIcons.arrowRight,
-              color: Colors.white,
-            ),
+            const Icon(LucideIcons.arrowRight, color: Colors.white),
             const SizedBox(width: 10),
             Text(
               text,
