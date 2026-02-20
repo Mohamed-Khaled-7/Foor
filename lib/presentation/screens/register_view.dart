@@ -1,10 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/auth_cubit.dart';
-import 'package:musa/presentation/screens/loginPage.dart';
+import 'package:musa/const/const.dart';
+import 'package:musa/data/models/profile_model.dart';
+import 'package:musa/presentation/screens/login_view.dart';
 import 'package:musa/presentation/widget/customButton.dart';
 import 'package:musa/presentation/widget/customShowDialog.dart';
 import 'package:musa/presentation/widget/customSnakPar.dart';
@@ -166,18 +168,18 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     label: const Text('Password'),
                     labelStyle: GoogleFonts.poppins(
-                      color: Colors.grey,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                     filled: true,
-                    fillColor: Colors.transparent,
+                    fillColor: Colors.white,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.black, width: 1.5),
+                      borderSide: BorderSide(color: Colors.black, width: 2),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.black, width: 1.5),
+                      borderSide: BorderSide(color: Colors.black, width: 2.9),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -192,9 +194,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: 0xFF4C6FFF,
                     text: 'Create account',
                     onPressed: () async {
+                      ProfileModel profile = ProfileModel(
+                        firstName: firstName!,
+                        lastName: lastName!,
+                        email: email!,
+                        user: userName!,
+                      );
+                      var profileBox = Hive.box<ProfileModel>(ProfileBox);
                       if (formKey.currentState!.validate()) {
-                        context.read<AuthCubit>().register(email!, password!);
+                        context.read<AuthCubit>().register(
+                          profile,
+                          email!,
+                          password!,
+                        );
                       }
+                      profileBox.put('currentUser', profile);
                     },
                   ),
                 ),

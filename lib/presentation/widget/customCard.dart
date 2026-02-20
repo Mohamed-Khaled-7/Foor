@@ -2,13 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/favoriate_cubit.dart';
-import 'package:musa/const/const.dart';
 import 'package:musa/data/models/product_model.dart';
-import 'package:musa/data/repository/favoriate_repository.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomCard extends StatefulWidget {

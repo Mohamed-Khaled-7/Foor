@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:musa/presentation/screens/HomeScreen.dart';
 import 'package:musa/presentation/screens/cart_view.dart';
 import 'package:musa/presentation/screens/favoritView.dart';
-import 'package:musa/presentation/screens/profileScreen.dart';
-import 'package:musa/presentation/screens/search_view.dart';
+import 'package:musa/presentation/screens/home_screen.dart';
+import 'package:musa/presentation/screens/profile_view.dart';
 
 class NavigationView extends StatefulWidget {
   NavigationView({super.key});
@@ -25,36 +24,54 @@ class _NavigationViewState extends State<NavigationView> {
     ProfilePage(),
   ];
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        selectedLabelStyle: GoogleFonts.poppins(fontSize: 18),
-        selectedItemColor: Colors.black,
-        currentIndex: currentIndex,
-        onTap: (val) {
+    return WillPopScope(
+      onWillPop: () async {
+        if (currentIndex != 0) {
           setState(() {
-            currentIndex = val;
+            currentIndex = 0;
           });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(LucideIcons.home, color: Colors.black54),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LucideIcons.heart, color: Colors.black54),
-            label: "Favoriates",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LucideIcons.shoppingBag, color: Colors.black54),
-            label: "Cart",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LucideIcons.user, color: Colors.black54),
-            label: "You",
-          ),
-        ],
+          return false;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Press back again to exit'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+          return false;
+        }
+      },
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          selectedLabelStyle: GoogleFonts.poppins(fontSize: 18),
+          selectedItemColor: Colors.black,
+          currentIndex: currentIndex,
+          onTap: (val) {
+            setState(() {
+              currentIndex = val;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(LucideIcons.home, color: Colors.black54),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(LucideIcons.heart, color: Colors.black54),
+              label: "Favoriates",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(LucideIcons.shoppingBag, color: Colors.black54),
+              label: "Cart",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(LucideIcons.user, color: Colors.black54),
+              label: "You",
+            ),
+          ],
+        ),
+        body: listWidget[currentIndex],
       ),
-      body: listWidget[currentIndex],
     );
   }
 }

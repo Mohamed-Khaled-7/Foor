@@ -16,7 +16,7 @@ class CustomButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -27,19 +27,15 @@ class CustomButton extends StatelessWidget {
           ),
           elevation: 0,
         ),
-        child: Row(
-          children: [
-            const Icon(LucideIcons.arrowRight, color: Colors.white),
-            const SizedBox(width: 10),
-            Text(
-              text,
-              style: GoogleFonts.poppins(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
+        child: Center(
+          child: Text(
+            text,
+            style: GoogleFonts.poppins(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
             ),
-          ],
+          ),
         ),
       ),
     );

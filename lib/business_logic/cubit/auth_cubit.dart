@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:musa/data/models/profile_model.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
 
+  AuthCubit() : super(AuthInitial());
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   void checkUser() {
     final user = auth.currentUser;
@@ -27,13 +29,17 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> register(String email, String password) async {
+  Future<void> register(ProfileModel profile, String email, String password) async {
     emit(AuthLoading());
     try {
       await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      firestore
+          .collection('user')
+          .doc(auth.currentUser!.uid)
+          .set(profile.toJson());
       emit(AuthAuthenticated(user: auth.currentUser!));
     } on Exception catch (e) {
       emit(AuthError(errMessage: e.toString()));

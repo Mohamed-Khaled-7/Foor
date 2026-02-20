@@ -54,4 +54,7 @@ class CartRepository {
   int itemQuntity(ProductModel productModel) {
     return cartDataSource.getItemQuntity(productModel);
   }
+  getItemCount() {
+    return cartDataSource.getItemCount();
+  }
 }

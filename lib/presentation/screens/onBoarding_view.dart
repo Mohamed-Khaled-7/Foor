@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musa/data/models/onBoardingModel.dart';
-import 'package:musa/presentation/screens/registerPage.dart';
-import 'package:musa/presentation/screens/loginPage.dart';
+import 'package:musa/presentation/screens/register_view.dart';
+import 'package:musa/presentation/screens/login_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {

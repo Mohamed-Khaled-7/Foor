@@ -5,50 +5,62 @@ import 'package:musa/presentation/widget/customSnakPar.dart';
 
 class CustomTextField extends StatelessWidget {
   Function(String) onChange;
-  final String hintText;
-  final IconData icon;
-  final String lable;
-
-  final String? Function(String?) validator;
+  final String? hintText;
+  final IconData? icon;
+  final String? lable;
+  final TextEditingController? controller;
+  final int? color;
+  final String? Function(String?)? validator;
   CustomTextField({
+    this.color,
+    this.controller,
     super.key,
-    required this.hintText,
+    this.hintText,
     required this.onChange,
-    required this.icon,
-    required this.lable,
-    required this.validator,
+    this.icon,
+    this.lable,
+    this.validator,
   });
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       validator: validator,
       cursorColor: Colors.black,
       onChanged: onChange,
-      style: GoogleFonts.poppins(color: Colors.black),
+      style: GoogleFonts.poppins(
+        color: Colors.grey[800],
+        fontWeight: FontWeight.bold,
+        fontSize: 19,
+      ),
       decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: Colors.black, size: 20),
+        prefixIcon: icon != null
+            ? Icon(icon, color: Colors.black, size: 23)
+            : null,
         hintText: hintText,
-
         labelStyle: GoogleFonts.poppins(
-          color: Colors.grey,
+          color: Colors.grey[800],
           fontWeight: FontWeight.bold,
         ),
-        hintStyle: GoogleFonts.poppins(color: Colors.grey),
-        floatingLabelStyle: GoogleFonts.poppins(color: Colors.black),
+        hintStyle: GoogleFonts.poppins(
+          color: Colors.grey[700],
+          fontWeight: FontWeight.bold,
+        ),
+        floatingLabelStyle: GoogleFonts.poppins(color: const Color(0xFF000000)),
         filled: true,
         labelText: lable,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(color: Colors.black),
         ),
-        fillColor: Colors.transparent,
+        fillColor: Color(color ?? 0x00000000),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.black, width: 1.5),
+          borderSide: BorderSide(color: Colors.black, width: 2),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.black, width: 1.5),
+          borderSide: BorderSide(color: Colors.black, width: 3),
         ),
       ),
     );

@@ -43,5 +43,9 @@ class CartCubit extends Cubit<CartState> {
   int itemQuntity(ProductModel productModel){
     return cartRepository.itemQuntity(productModel);
   }
+  getItemCount(){
+    return cartRepository.getItemCount();
+  }
+  
 }
 

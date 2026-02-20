@@ -29,7 +29,7 @@ class _CategoryListState extends State<CategoryList> {
           );
         } else if (state is CategoriesLoaded) {
           final firstCategorie = state.categories.first;
-          context.read<ProductsCubit>().getAllProducts(url: firstCategorie.url);
+          context.read<ProductsCubit>().getAllProducts(url: 'https://dummyjson.com/products');
           return SizedBox(
             height: 130,
             child: ListView.builder(

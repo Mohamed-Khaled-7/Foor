@@ -1,44 +1,50 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:musa/business_logic/cubit/auth_cubit.dart';
 import 'package:musa/business_logic/cubit/cart_cubit.dart';
 import 'package:musa/business_logic/cubit/categories_cubit.dart';
 import 'package:musa/business_logic/cubit/favoriate_cubit.dart';
 import 'package:musa/business_logic/cubit/products_cubit.dart';
+import 'package:musa/business_logic/cubit/profile_cubit.dart';
 import 'package:musa/const/const.dart';
 import 'package:musa/data/datasource/local/cart_local_datasource.dart';
 import 'package:musa/data/datasource/local/favoriate_local_datasoure.dart';
+import 'package:musa/data/datasource/local/local_profile_datascource.dart';
 import 'package:musa/data/models/product_model.dart';
+import 'package:musa/data/models/profile_model.dart';
 import 'package:musa/data/repository/cart_repository.dart';
 import 'package:musa/data/repository/favoriate_repository.dart';
 import 'package:musa/data/repository/get_all_categories_repo.dart';
 import 'package:musa/data/repository/get_all_products_repo.dart';
 import 'package:musa/data/datasource/remote/services/get_all_categories.dart';
 import 'package:musa/data/datasource/remote/services/get_all_products.dart';
+import 'package:musa/data/repository/proifle_repository.dart';
 import 'package:musa/firebase_options.dart';
-import 'package:musa/presentation/screens/homeScreen.dart';
+import 'package:musa/presentation/screens/home_screen.dart';
 import 'package:musa/presentation/screens/navigation_view.dart';
-import 'package:musa/presentation/screens/registerPage.dart';
-import 'package:musa/presentation/screens/loginPage.dart';
-import 'package:musa/presentation/screens/onBoardingScreen.dart';
+import 'package:musa/presentation/screens/profile_view.dart';
+import 'package:musa/presentation/screens/register_view.dart';
+import 'package:musa/presentation/screens/login_view.dart';
+import 'package:musa/presentation/screens/onBoarding_view.dart';
 import 'package:musa/presentation/screens/search_view.dart';
-import 'package:musa/presentation/screens/splashScreen.dart';
+import 'package:musa/presentation/screens/splash_screen.dart';
 import 'package:musa/presentation/screens/cart_view.dart';
-import 'package:musa/presentation/screens/product_details.dart';
+import 'package:musa/presentation/screens/product_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
   await Hive.openBox<ProductModel>(FavoritesBox);
   await Hive.openBox<ProductModel>(CartBox);
-  await Hive.openBox(ProfileBox);
+  Hive.registerAdapter(ProfileModelAdapter());
+  Hive.deleteBoxFromDisk(ProfileBox);
+  await Hive.openBox<ProfileModel>(ProfileBox);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(Foor());
 }
-
 final categoryService = GetAllCategoriesServices();
 final categoryRepository = CategoriesRepository(
   getAllCategoriesServices: categoryService,
@@ -55,8 +61,12 @@ final favoriateCubit = FavoriateCubit(
 final cartcubit = CartCubit(
   cartRepository: CartRepository(cartDataSource: CartLocalDataSource()),
 );
+final profileCubit = ProfileCubit(
+  Repo: ProfileRepository(profileDataSource: ProfileDataSource()),
+);
 
 class Foor extends StatelessWidget {
+  
   Foor({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -71,6 +81,8 @@ class Foor extends StatelessWidget {
         ),
         BlocProvider(create: (context) => cartcubit),
         BlocProvider(create: (context) => favoriateCubit),
+        BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => profileCubit),
       ],
       child: MaterialApp(
         routes: {
@@ -83,8 +95,9 @@ class Foor extends StatelessWidget {
           RegisterPage.id: (context) => RegisterPage(),
           LoginPage.id: (context) => LoginPage(),
           CustomProductDetails.id: (context) => CustomProductDetails(),
+          ProfilePage.id: (context) => ProfilePage(),
         },
-        initialRoute: NavigationView.id,
+        initialRoute: SplashScreen.id,
         debugShowCheckedModeBanner: false,
       ),
     );

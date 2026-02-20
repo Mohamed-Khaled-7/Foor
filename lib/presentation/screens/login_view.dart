@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/auth_cubit.dart';
 import 'package:musa/presentation/screens/navigation_view.dart';
-import 'package:musa/presentation/screens/registerPage.dart';
+import 'package:musa/presentation/screens/register_view.dart';
 import 'package:musa/presentation/widget/customButton.dart';
 import 'package:musa/presentation/widget/customShowDialog.dart';
 import 'package:musa/presentation/widget/customSnakPar.dart';
