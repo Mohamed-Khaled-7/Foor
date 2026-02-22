@@ -6,21 +6,21 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/auth_cubit.dart';
 import 'package:musa/const/const.dart';
 import 'package:musa/data/models/profile_model.dart';
-import 'package:musa/presentation/screens/login_view.dart';
+import 'package:musa/presentation/views/login_view.dart';
 import 'package:musa/presentation/widget/customButton.dart';
 import 'package:musa/presentation/widget/customShowDialog.dart';
 import 'package:musa/presentation/widget/customSnakPar.dart';
 import 'package:musa/presentation/widget/customTextFormField.dart';
 
-class RegisterPage extends StatefulWidget {
-  RegisterPage({super.key});
-  static String id = 'RegisterPage';
+class RegisterView extends StatefulWidget {
+  RegisterView({super.key});
+  static String id = 'RegisterView';
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterViewState extends State<RegisterView> {
   String? firstName;
   String? lastName;
   String? userName;

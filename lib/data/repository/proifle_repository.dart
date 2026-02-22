@@ -24,5 +24,8 @@ class ProfileRepository {
   {
     return profileDataSource.getName();
   }
+  pickImage(){
+    return profileDataSource.pickImage();
+  }
 
 }

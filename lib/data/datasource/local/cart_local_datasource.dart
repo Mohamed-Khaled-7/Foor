@@ -20,7 +20,6 @@ class CartLocalDataSource {
     );
     cartBox.put(newProduct.id, newProduct);
   }
-
   void delete(ProductModel productModel) {
     if (cartBox.containsKey(productModel.id)) {
       cartBox.delete(productModel.id);

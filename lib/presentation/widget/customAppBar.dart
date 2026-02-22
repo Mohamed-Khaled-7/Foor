@@ -6,7 +6,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/cart_cubit.dart';
 import 'package:musa/business_logic/cubit/profile_cubit.dart';
 import 'package:musa/const/const.dart';
-import 'package:musa/presentation/screens/cart_view.dart';
+import 'package:musa/presentation/views/cart_view.dart';
 import 'package:musa/presentation/widget/profile_body.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {

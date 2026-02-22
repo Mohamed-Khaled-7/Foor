@@ -60,60 +60,65 @@ class _CustomCartCardState extends State<CustomCartCard> {
               ),
             ),
             const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.product.title,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.product.title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+              
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    CustomSmallButtom(
-                      icon: LucideIcons.minus,
-                      bgColor: Colors.black54,
-                      iconColor: Colors.white,
-                      onTap: () {
-                        context.read<CartCubit>().decreaseCart(widget.product);
-                      },
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      '${widget.product.quantity}',
-                      style: GoogleFonts.poppins(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      CustomSmallButtom(
+                        icon: LucideIcons.minus,
+                        bgColor: Colors.black54,
+                        iconColor: Colors.white,
+                        onTap: () {
+                          context.read<CartCubit>().decreaseCart(widget.product);
+                        },
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    CustomSmallButtom(
-                      icon: LucideIcons.plus,
-                      bgColor: Colors.blueAccent,
-                      iconColor: Colors.white,
-                      onTap: () {
-                        context.read<CartCubit>().addCart(widget.product);
-                      },
-                    ),
-                    SizedBox(width: 88),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        overflow: TextOverflow.ellipsis,
-                        '\$${totalPriceForProduct.toStringAsFixed(2)}',
+                      const SizedBox(width: 8),
+                      Text(
+                        '${widget.product.quantity}',
                         style: GoogleFonts.poppins(
                           fontSize: 17,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      const SizedBox(width: 8),
+                      CustomSmallButtom(
+                        icon: LucideIcons.plus,
+                        bgColor: Colors.blueAccent,
+                        iconColor: Colors.white,
+                        onTap: () {
+                          context.read<CartCubit>().addCart(widget.product);
+                        },
+                      ),
+                      SizedBox(width: 88),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          overflow: TextOverflow.ellipsis,
+                          '\$${totalPriceForProduct.toStringAsFixed(2)}',
+                          style: GoogleFonts.poppins(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

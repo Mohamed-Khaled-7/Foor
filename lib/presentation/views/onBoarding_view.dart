@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musa/data/models/onBoardingModel.dart';
-import 'package:musa/presentation/screens/register_view.dart';
-import 'package:musa/presentation/screens/login_view.dart';
+import 'package:musa/presentation/views/register_view.dart';
+import 'package:musa/presentation/views/login_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -85,7 +85,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   InkWell(
                     onTap: () {
                       if (currentIndex == 2) {
-                        Navigator.pushNamed(context, RegisterPage.id);
+                        Navigator.pushNamed(context, RegisterView.id);
                       } else {
                         pageController.nextPage(
                           duration: const Duration(milliseconds: 500),

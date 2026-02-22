@@ -20,16 +20,15 @@ import 'package:musa/data/datasource/remote/services/get_all_categories.dart';
 import 'package:musa/data/datasource/remote/services/get_all_products.dart';
 import 'package:musa/data/repository/proifle_repository.dart';
 import 'package:musa/firebase_options.dart';
-import 'package:musa/presentation/screens/home_screen.dart';
-import 'package:musa/presentation/screens/navigation_view.dart';
-import 'package:musa/presentation/screens/profile_view.dart';
-import 'package:musa/presentation/screens/register_view.dart';
-import 'package:musa/presentation/screens/login_view.dart';
-import 'package:musa/presentation/screens/onBoarding_view.dart';
-import 'package:musa/presentation/screens/search_view.dart';
-import 'package:musa/presentation/screens/splash_screen.dart';
-import 'package:musa/presentation/screens/cart_view.dart';
-import 'package:musa/presentation/screens/product_details_view.dart';
+import 'package:musa/presentation/views/home_screen.dart';
+import 'package:musa/presentation/views/navigation_view.dart';
+import 'package:musa/presentation/views/profile_view.dart';
+import 'package:musa/presentation/views/register_view.dart';
+import 'package:musa/presentation/views/login_view.dart';
+import 'package:musa/presentation/views/onBoarding_view.dart';
+import 'package:musa/presentation/views/splash_screen.dart';
+import 'package:musa/presentation/views/cart_view.dart';
+import 'package:musa/presentation/views/product_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -40,11 +39,11 @@ void main() async {
   await Hive.openBox<ProductModel>(FavoritesBox);
   await Hive.openBox<ProductModel>(CartBox);
   Hive.registerAdapter(ProfileModelAdapter());
-  Hive.deleteBoxFromDisk(ProfileBox);
   await Hive.openBox<ProfileModel>(ProfileBox);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(Foor());
 }
+
 final categoryService = GetAllCategoriesServices();
 final categoryRepository = CategoriesRepository(
   getAllCategoriesServices: categoryService,
@@ -66,7 +65,6 @@ final profileCubit = ProfileCubit(
 );
 
 class Foor extends StatelessWidget {
-  
   Foor({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -88,11 +86,10 @@ class Foor extends StatelessWidget {
         routes: {
           HomeScreen.id: (context) => HomeScreen(),
           CartView.id: (context) => CartView(),
-          SearchView.id: (context) => SearchView(),
           SplashScreen.id: (context) => SplashScreen(),
           NavigationView.id: (context) => NavigationView(),
           OnBoardingScreen.id: (context) => OnBoardingScreen(),
-          RegisterPage.id: (context) => RegisterPage(),
+          RegisterView.id: (context) => RegisterView(),
           LoginPage.id: (context) => LoginPage(),
           CustomProductDetails.id: (context) => CustomProductDetails(),
           ProfilePage.id: (context) => ProfilePage(),

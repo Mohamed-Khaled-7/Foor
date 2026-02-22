@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:musa/presentation/widget/custom_search_delegate.dart';
 
 class CustomTextSearch extends StatelessWidget {
   const CustomTextSearch({super.key});
@@ -10,6 +11,10 @@ class CustomTextSearch extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
+        readOnly: true,
+        onTap: () {
+          showSearch(context: context, delegate: CustomSearchDelegate());
+        },
         decoration: InputDecoration(
           hintText: 'Search',
           hintStyle: GoogleFonts.poppins(color: Colors.black),

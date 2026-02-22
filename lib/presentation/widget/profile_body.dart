@@ -46,10 +46,10 @@ class _ProfileBodyState extends State<ProfileBody> {
       children: [
         Center(
           child: SizedBox(
-            child: CachedNetworkImage(
+            child: Image.asset(
               width: 200,
               height: 200,
-              imageUrl: 'https://cdn-icons-png.flaticon.com/512/847/847969.png',
+              widget.profile.image!,
             ),
           ),
         ),

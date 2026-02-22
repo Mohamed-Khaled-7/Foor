@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:musa/business_logic/cubit/products_cubit.dart';
 import 'package:musa/presentation/widget/categoriesList.dart';
 import 'package:musa/presentation/widget/customAppBar.dart';
 import 'package:musa/presentation/widget/customHeader.dart';
@@ -12,8 +13,8 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-  
 }
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 CategoryList(),
                 SizedBox(height: 23),
                 CustomHeader(title: 'Products'),
-                CustomListProducts(),
+                BlocBuilder<ProductsCubit, ProductsState>(
+                  builder: (context, state) {
+                    return CustomListProducts();
+                  },
+                ),
               ],
             ),
           ),

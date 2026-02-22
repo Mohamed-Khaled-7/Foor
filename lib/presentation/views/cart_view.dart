@@ -20,6 +20,7 @@ class _CartViewState extends State<CartView> {
     super.initState();
     context.read<CartCubit>().fetchAllCarts();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +38,8 @@ class _CartViewState extends State<CartView> {
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
             return CustomCartButton(
-              totalPrice: context.read<CartCubit>().totalPrice(),
               text: 'Checkout',
+              totalPrice: context.read<CartCubit>().totalPrice(),
               color: 0xFF000000,
               onPressed: () {},
             );

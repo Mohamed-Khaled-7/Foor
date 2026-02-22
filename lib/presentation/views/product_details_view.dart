@@ -62,7 +62,7 @@ class _CustomProductDetailsState extends State<CustomProductDetails> {
                 backgroundColor: Colors.white.withOpacity(0.7),
                 child: IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(LucideIcons.arrowLeft, color: Colors.black),
+                  icon: const Icon(LucideIcons.arrowLeft, color: Colors.grey),
                 ),
               ),
             ),

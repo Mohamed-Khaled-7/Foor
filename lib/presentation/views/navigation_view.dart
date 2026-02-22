@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:musa/presentation/screens/cart_view.dart';
-import 'package:musa/presentation/screens/favoritView.dart';
-import 'package:musa/presentation/screens/home_screen.dart';
-import 'package:musa/presentation/screens/profile_view.dart';
+import 'package:musa/presentation/views/cart_view.dart';
+import 'package:musa/presentation/views/favoritView.dart';
+import 'package:musa/presentation/views/home_screen.dart';
+import 'package:musa/presentation/views/profile_view.dart';
 
 class NavigationView extends StatefulWidget {
   NavigationView({super.key});

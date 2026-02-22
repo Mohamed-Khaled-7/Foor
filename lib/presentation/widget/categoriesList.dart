@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musa/business_logic/cubit/categories_cubit.dart';
 import 'package:musa/business_logic/cubit/products_cubit.dart';
 import 'package:musa/presentation/widget/categoryItem.dart';
-import 'package:shimmer/shimmer.dart';
+
 
 class CategoryList extends StatefulWidget {
   const CategoryList({super.key});
@@ -13,10 +13,11 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-    void initState() {
-  super.initState();
-  context.read<CategoriesCubit>().getAllCategories();
-}
+  void initState() {
+    super.initState();
+    context.read<CategoriesCubit>().getAllCategories();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoriesCubit, CategoriesState>(
@@ -28,8 +29,9 @@ class _CategoryListState extends State<CategoryList> {
             ),
           );
         } else if (state is CategoriesLoaded) {
-          final firstCategorie = state.categories.first;
-          context.read<ProductsCubit>().getAllProducts(url: 'https://dummyjson.com/products');
+          context.read<ProductsCubit>().getAllProducts(
+            url: 'https://dummyjson.com/products',
+          );
           return SizedBox(
             height: 130,
             child: ListView.builder(
@@ -44,11 +46,7 @@ class _CategoryListState extends State<CategoryList> {
             ),
           );
         } else {
-        
-          return Shimmer(
-            child: Container(height: 100, width: 100),
-            gradient: const LinearGradient(colors: [Colors.grey, Colors.white]),
-          );
+          return CircularProgressIndicator();
         }
       },
     );

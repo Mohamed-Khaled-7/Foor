@@ -33,19 +33,7 @@ class CustomCartButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '\$ ${totalPrice.toStringAsFixed(2)}',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            const SizedBox(width: 10),
+            SizedBox(width: 93),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -57,13 +45,20 @@ class CustomCartButton extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(width: 8),
-                const Icon(
-                  LucideIcons.arrowRight,
-                  color: Colors.white,
-                  size: 20,
-                ),
               ],
+            ),
+            SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                '\$${totalPrice.toStringAsFixed(2)}',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
           ],
         ),
