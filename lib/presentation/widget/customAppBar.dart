@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/cart_cubit.dart';
 import 'package:musa/business_logic/cubit/profile_cubit.dart';
-import 'package:musa/const/const.dart';
 import 'package:musa/presentation/views/cart_view.dart';
-import 'package:musa/presentation/widget/profile_body.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  CustomAppBar({super.key});
+  const CustomAppBar({super.key});
   @override
   Widget build(BuildContext context) {
     return AppBar(

@@ -29,13 +29,28 @@ class ProfileModel extends HiveObject {
       'image': image,
     };
   }
-  factory ProfileModel.fromJson(Map<String ,dynamic> json) {
+  factory ProfileModel.fromJson(Map<String ,dynamic> json){
     return ProfileModel(
       firstName: json['firstName'],
       lastName: json['lastName'],
       email: json['email'],
       user: json['user'],
       image: json['image'],
+    );
+  }
+ProfileModel copyWith({
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? user,
+    String? image,
+  }) {
+    return ProfileModel(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      email: email ?? this.email,
+      user: user ?? this.user,
+      image: image ?? this.image,
     );
   }
 }

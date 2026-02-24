@@ -21,6 +21,7 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
+   late ProfileModel profile;
   String? firstName;
   String? lastName;
   String? userName;
@@ -50,10 +51,9 @@ class _RegisterViewState extends State<RegisterView> {
         listener: (context, state) {
           if (state is AuthLoading) {
             showDialgo(context);
-          } else {
-            Navigator.pop(context);
           }
           if (state is AuthError) {
+            Navigator.pop(context);
             CustomSnakPar(
               context: context,
               message: state.errMessage,
@@ -62,6 +62,9 @@ class _RegisterViewState extends State<RegisterView> {
             );
           }
           if (state is AuthAuthenticated) {
+            Navigator.pop(context);
+            var profileBox = Hive.box<ProfileModel>(ProfileBox);
+            profileBox.put('currentUser', profile);
             CustomSnakPar(
               context: context,
               message: 'Register Successfully',
@@ -194,21 +197,20 @@ class _RegisterViewState extends State<RegisterView> {
                     color: 0xFF4C6FFF,
                     text: 'Create account',
                     onPressed: () async {
-                      ProfileModel profile = ProfileModel(
+                      if (formKey.currentState!.validate()) {
+                        profile = ProfileModel(
                         firstName: firstName!,
                         lastName: lastName!,
                         email: email!,
                         user: userName!,
                       );
-                      var profileBox = Hive.box<ProfileModel>(ProfileBox);
-                      if (formKey.currentState!.validate()) {
                         context.read<AuthCubit>().register(
                           profile,
                           email!,
                           password!,
                         );
                       }
-                      profileBox.put('currentUser', profile);
+                      
                     },
                   ),
                 ),

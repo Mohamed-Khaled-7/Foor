@@ -1,46 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:hive/hive.dart';
-import 'package:musa/const/const.dart';
-import 'package:musa/data/datasource/local/local_profile_datascource.dart';
 import 'package:musa/data/models/profile_model.dart';
 
-class ProfileRepository {
-  ProfileDataSource profileDataSource;
-  ProfileRepository({required this.profileDataSource});
-  var profileBox = Hive.box<ProfileModel>(ProfileBox);
-  ProfileModel? getProfileLocal() {
-    return profileDataSource.getProfile();
-  }
-
-  void saveProfileLocal(ProfileModel profile) {
-    profileDataSource.saveProfile(profile);
-  }
-
-
-  bool HasLocalProfile() {
-    return profileDataSource.checkProfileExists();
-  }
-
-  getName() {
-    return profileDataSource.getName();
-  }
-
-  pickImage() {
-    return profileDataSource.pickImage();
-  }
-
+class GetProfileService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   getCurrentUid() {
-    var uid = FirebaseAuth.instance.currentUser!.uid;
+    var uid = FirebaseAuth.instance.currentUser?.uid;
     return uid;
   }
 
-  Future<bool> hasRemoteProfile(uid) async {
+  Future<bool> hasProfile(uid) async {
     DocumentSnapshot doc = await firestore.collection('users').doc(uid).get();
     return doc.exists;
   }
@@ -59,9 +31,8 @@ class ProfileRepository {
     }
   }
 
-  Future<void> CurrentUserProfile(uid, ProfileModel? profile) async {
-    final Profile = await profile;
-    await firestore.collection('users').doc(uid).set(Profile!.toJson());
+  CurrentUserPofile(uid, ProfileModel profile) {
+    firestore.collection('users').doc(uid).set(profile.toJson());
   }
 
   UpdateProfile(uid, ProfileModel profile) async {

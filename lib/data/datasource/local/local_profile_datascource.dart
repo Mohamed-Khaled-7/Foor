@@ -9,23 +9,29 @@ class ProfileDataSource {
     return profileBox.containsKey('currentUser');
   }
 
-   ProfileModel? getProfile() {
+  getName() {
+    var profile = profileBox.get('currentUser');
+    if (profile != null) {
+      return profile.firstName + ' ' + profile.lastName;
+    }
+    return 'Guest User';
+  }
+
+  ProfileModel? getProfile() {
     return profileBox.get('currentUser');
   }
-  Future<void> saveProfile(ProfileModel profile)async{
-   await profileBox.put('currentUser', profile);
-  }
-  getName()
-  {
-    return profileBox.get('currentUser')?.firstName;
-  }
-  Future<String?> pickImage() async {
-  final picker = ImagePicker();
-  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-  if (image != null) {
-    return image.path;
+  Future<void> saveProfile(ProfileModel profile) async {
+    await profileBox.put('currentUser', profile);
   }
-  return null;
-}
+
+  Future<String?> pickImage() async {
+    final picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      return image.path;
+    } else {
+      return null;
+    }
+  }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-import 'package:musa/presentation/widget/customSnakPar.dart';
+
 
 class CustomTextField extends StatelessWidget {
   Function(String) onChange;
+  final bool enabled;
   final String? hintText;
   final IconData? icon;
   final String? lable;
@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final int? color;
   final String? Function(String?)? validator;
   CustomTextField({
+    this.enabled = true,
     this.color,
     this.controller,
     super.key,
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       controller: controller,
       validator: validator,
       cursorColor: Colors.black,

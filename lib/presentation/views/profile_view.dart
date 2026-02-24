@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
-    context.read<ProfileCubit>().profileData();
+    context.read<ProfileCubit>().getProfile();
   }
 
   @override
@@ -37,10 +39,16 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
+          if (state is ProfileLoading) {
+            return Center(child: CircularProgressIndicator());
+          }
           if (state is ProfileLoaded) {
             return ProfileBody(profile: state.profileModel);
+          }
+          if (state is ProfileError) {
+            return Text('Error ${state.errMessage}');
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Text('$e');
           }
         },
       ),

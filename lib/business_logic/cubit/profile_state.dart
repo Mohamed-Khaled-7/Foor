@@ -1,7 +1,6 @@
 part of 'profile_cubit.dart';
 
-@immutable
-sealed class ProfileState {}
+ sealed class ProfileState {}
 
 final class ProfileInitial extends ProfileState {}
 
@@ -10,3 +9,8 @@ class ProfileLoaded extends ProfileState {
   ProfileLoaded({required this.profileModel});
 }
 class ProfileLoggedOut extends ProfileState {}
+class ProfileError extends ProfileState {
+  final String errMessage;
+  ProfileError({required this.errMessage});
+}
+class ProfileLoading extends ProfileState {}

@@ -25,7 +25,7 @@ class _CategoryListState extends State<CategoryList> {
         if (state is CategoriesLoading) {
           return const Center(
             child: CircularProgressIndicator(
-              color: Color.fromARGB(255, 23, 51, 214),
+              color: Color.fromARGB(255, 70, 92, 218),
             ),
           );
         } else if (state is CategoriesLoaded) {

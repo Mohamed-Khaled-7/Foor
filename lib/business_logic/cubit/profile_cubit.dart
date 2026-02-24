@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:musa/data/models/product_model.dart';
+import 'dart:async';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musa/data/models/profile_model.dart';
 import 'package:musa/data/repository/proifle_repository.dart';
 
@@ -10,28 +10,38 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit({required this.Repo}) : super(ProfileInitial());
   final ProfileRepository Repo;
 
-  profileData() {
-    final profileData = Repo.getProfile();
-    if (profileData != null) {
-      emit(ProfileLoaded(profileModel: profileData));
+  Future<void> getProfile() async {
+    //بنعرض الداتا الاول من اللوكال وبعد كدا نحدثها من الريموت
+    ProfileModel? LocalProfile = Repo.getProfileLocal();
+    if (LocalProfile != null) {
+      emit(ProfileLoaded(profileModel: LocalProfile));
     } else {
-      emit(
-        ProfileLoaded(
-          profileModel: ProfileModel(
-            firstName: '',
-            lastName: 'User',
-            email: 'non',
-            user: 'user',
-            image: 'https://cdn-icons-png.flaticon.com/512/847/847969.png',
-          ),
-        ),
-      );
+      emit(ProfileLoading());
+    }
+    try {
+      var uid = Repo.getCurrentUid();
+      var remoteProfile = await Repo.fetchProfileFromServer(uid);
+      if (remoteProfile != null) {
+        Repo.saveProfileLocal(remoteProfile);
+        emit(ProfileLoaded(profileModel: remoteProfile));
+      }
+    } on Exception catch (e) {
+      if (LocalProfile == null) {
+        emit(ProfileError(errMessage: 'Failed to fetch profile: $e'));
+      }
     }
   }
 
-  updateProfile(ProfileModel profile) {
-    Repo.saveProfile(profile);
-    emit(ProfileLoaded(profileModel: profile));
+  Future<void> updateProfile(ProfileModel profile) async {
+    try {
+      emit(ProfileLoading());
+      var uid = Repo.getCurrentUid();
+      await Repo.UpdateProfile(uid, profile); //من السيرفر
+      Repo.saveProfileLocal(profile); //in local
+      emit(ProfileLoaded(profileModel: profile));
+    } catch (e) {
+      emit(ProfileError(errMessage: 'error $e'));
+    }
   }
 
   getName() {
@@ -41,4 +51,24 @@ class ProfileCubit extends Cubit<ProfileState> {
   getImage() {
     return Repo.pickImage();
   }
+
+  Future<void> updateProfileImage() async {
+    emit(ProfileLoading());
+    final String? path = await Repo.pickImage();
+    try {
+      if (path != null) {
+        var uid = Repo.getCurrentUid();
+        final String imageUrl = await Repo.uploadImageToStorage(path, uid);
+        var currentProfile = Repo.getProfileLocal();
+        if (currentProfile != null) {
+          var updatedProfile = currentProfile.copyWith(image: imageUrl);
+          await updateProfile(updatedProfile);
+        }
+      }
+    } on Exception catch (e) {
+      emit(ProfileError(errMessage: 'error $e'));
+    }
+  }
+
+  
 }

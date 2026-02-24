@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:musa/business_logic/cubit/auth_cubit.dart';
 import 'package:musa/business_logic/cubit/profile_cubit.dart';
 import 'package:musa/data/models/profile_model.dart';
 import 'package:musa/presentation/widget/customButton.dart';
-import 'package:musa/presentation/widget/customSnakPar.dart';
 import 'package:musa/presentation/widget/customTextFormField.dart';
 
 class ProfileBody extends StatefulWidget {
   ProfileBody({super.key, required this.profile});
-
   final ProfileModel profile;
   @override
   State<ProfileBody> createState() => _ProfileBodyState();
@@ -23,6 +22,7 @@ class _ProfileBodyState extends State<ProfileBody> {
   late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController userController;
+
   @override
   void initState() {
     super.initState();
@@ -35,29 +35,62 @@ class _ProfileBodyState extends State<ProfileBody> {
     userController = TextEditingController(text: widget.profile.user);
   }
 
-   String ?firstName;
-   String? lastName;
-   String? email;
-   String? user;
-  @override
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        const SizedBox(height: 20),
         Center(
-          child: SizedBox(
-            child: Image.asset(
-              width: 200,
-              height: 200,
-              widget.profile.image!,
-            ),
+          child: Stack(
+            children: [
+              Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.blueAccent, width: 2),
+                ),
+                child: ClipOval(
+                  child: widget.profile.image != null
+                      ? CachedNetworkImage(
+                          imageUrl: widget.profile.image!,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.person, size: 50),
+                        )
+                      : const Icon(Icons.person, size: 50),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: GestureDetector(
+                  onTap: () {
+                    context.read<ProfileCubit>().updateProfileImage();
+                  },
+                  child: const CircleAvatar(
+                    backgroundColor: Colors.blueAccent,
+                    radius: 20,
+                    child: Icon(
+                      LucideIcons.camera,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
+        const SizedBox(height: 10),
         Center(
-          child: SafeArea(
-            child: Text(
-              '${nameController.text}',
-              style: GoogleFonts.poppins(fontSize: 22),
+          child: Text(
+            nameController.text,
+            style: GoogleFonts.poppins(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -69,9 +102,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                 child: CustomTextField(
                   controller: firstNameController,
                   onChange: (data) {
-                    nameController.text =
-                        '$firstName ${lastNameController.text}';
-                    setState() {}
+                    setState(() {
+                      nameController.text = '$data ${lastNameController.text}';
+                    });
                   },
                 ),
               ),
@@ -81,12 +114,12 @@ class _ProfileBodyState extends State<ProfileBody> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, right: 27, top: 16),
                 child: CustomTextField(
+                  enabled: true,
                   controller: lastNameController,
                   onChange: (data) {
-                    lastName = data;
-                    nameController.text =
-                        '${firstNameController.text} $lastName';
-                    setState() {}
+                    setState(() {
+                      nameController.text = '${firstNameController.text} $data';
+                    });
                   },
                 ),
               ),
@@ -96,62 +129,49 @@ class _ProfileBodyState extends State<ProfileBody> {
         Padding(
           padding: const EdgeInsets.only(left: 20, top: 28, right: 20),
           child: CustomTextField(
-            onChange: (data) {
-              user = data;
-            },
             controller: userController,
+            onChange: (data) {},
             color: 0x00000000,
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 20, top: 28, right: 20),
           child: CustomTextField(
-            onChange: (data) {
-              email = data;
-            },
+            enabled: false,
             controller: emailController,
+            onChange: (data) {},
             color: 0x00000000,
           ),
         ),
-        SizedBox(height: 17),
+        const SizedBox(height: 30),
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(
             width: double.infinity,
             height: 55,
             child: CustomButton(
               onPressed: () {
-                final updateProfile = ProfileModel(
-                  firstName: firstNameController.text.isEmpty
-                      ? firstName!
-                      : firstNameController.text,
-                  lastName: lastNameController.text.isEmpty
-                      ? lastName!
-                      : lastNameController.text,
-                  email: emailController.text.isEmpty
-                      ? email!
-                      : emailController.text,
-                  user: userController.text.isEmpty
-                      ? user!
-                      : userController.text,
+                final updatedProfile = widget.profile.copyWith(
+                  firstName: firstNameController.text,
+                  lastName: lastNameController.text,
+                  email: emailController.text,
+                  user: userController.text,
                   image: widget.profile.image,
                 );
-                BlocProvider.of<ProfileCubit>(
-                  context,
-                ).updateProfile(updateProfile);
-                CustomSnakPar(
-                  context: context,
-                  message: 'Profile Updated Successfully',
-                  backgroundColor: Colors.green,
-                  icons: Icons.check_circle_outline,
-                );
+                context.read<ProfileCubit>().updateProfile(updatedProfile);
               },
               text: 'Save Changes',
               color: Colors.blueAccent.value,
             ),
           ),
         ),
-        IconButton(onPressed: () {}, icon: Icon(LucideIcons.logOut)),
+        const SizedBox(height: 10),
+        IconButton(
+          onPressed: () {
+            context.read<AuthCubit>().logOut();
+          },
+          icon: const Icon(LucideIcons.logOut, color: Colors.red),
+        ),
       ],
     );
   }
