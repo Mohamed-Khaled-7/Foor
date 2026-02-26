@@ -21,7 +21,7 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-   late ProfileModel profile;
+  late ProfileModel profile;
   String? firstName;
   String? lastName;
   String? userName;
@@ -61,7 +61,8 @@ class _RegisterViewState extends State<RegisterView> {
               icons: LucideIcons.alertTriangle,
             );
           }
-          if (state is AuthAuthenticated) {
+          if (state is AuthAuthenticated &&
+              state.source == AuthSource.Register) {
             Navigator.pop(context);
             var profileBox = Hive.box<ProfileModel>(ProfileBox);
             profileBox.put('currentUser', profile);
@@ -199,18 +200,17 @@ class _RegisterViewState extends State<RegisterView> {
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         profile = ProfileModel(
-                        firstName: firstName!,
-                        lastName: lastName!,
-                        email: email!,
-                        user: userName!,
-                      );
+                          firstName: firstName!,
+                          lastName: lastName!,
+                          email: email!,
+                          user: userName!,
+                        );
                         context.read<AuthCubit>().register(
                           profile,
                           email!,
                           password!,
                         );
                       }
-                      
                     },
                   ),
                 ),

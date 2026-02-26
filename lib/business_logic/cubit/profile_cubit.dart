@@ -48,27 +48,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     return Repo.getName();
   }
 
-  getImage() {
-    return Repo.pickImage();
+ 
+  void resetProfile() {
+    emit(ProfileInitial());
   }
-
-  Future<void> updateProfileImage() async {
-    emit(ProfileLoading());
-    final String? path = await Repo.pickImage();
-    try {
-      if (path != null) {
-        var uid = Repo.getCurrentUid();
-        final String imageUrl = await Repo.uploadImageToStorage(path, uid);
-        var currentProfile = Repo.getProfileLocal();
-        if (currentProfile != null) {
-          var updatedProfile = currentProfile.copyWith(image: imageUrl);
-          await updateProfile(updatedProfile);
-        }
-      }
-    } on Exception catch (e) {
-      emit(ProfileError(errMessage: 'error $e'));
-    }
-  }
-
-  
 }

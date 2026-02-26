@@ -30,9 +30,7 @@ class ProfileRepository {
     return profileDataSource.getName();
   }
 
-  pickImage() {
-    return profileDataSource.pickImage();
-  }
+ 
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   getCurrentUid() {
@@ -77,7 +75,8 @@ class ProfileRepository {
         .child('profiles')
         .child('$uid.jpg');
     File file = File(path);
-    await ref.putFile(file);
+    UploadTask uploadTask = ref.putFile(file);
+    await uploadTask;
     String url = await ref.getDownloadURL();
     return url;
   }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/auth_cubit.dart';
+import 'package:musa/business_logic/cubit/profile_cubit.dart';
 import 'package:musa/presentation/views/navigation_view.dart';
 import 'package:musa/presentation/views/register_view.dart';
 import 'package:musa/presentation/widget/customButton.dart';
@@ -38,19 +39,20 @@ class _LoginPagejState extends State<LoginPage> {
         listener: (context, state) {
           if (state is AuthLoading) {
             showDialgo(context);
-          } else {
-            Navigator.pop(context);
           }
-          if (state is AuthAuthenticated) {
+          if (state is AuthAuthenticated && state.source == AuthSource.Login) {
+            Navigator.pop(context);
             CustomSnakPar(
               context: context,
               message: 'Login Successfully',
               backgroundColor: Colors.green[700],
               icons: LucideIcons.checkCircle,
             );
+            context.read<ProfileCubit>().getProfile();
             Navigator.pushNamed(context, NavigationView.id);
           }
           if (state is AuthError) {
+            Navigator.pop(context);
             CustomSnakPar(
               context: context,
               message: state.errMessage,

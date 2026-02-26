@@ -48,8 +48,9 @@ class GetProfileService {
         .child('profiles')
         .child('$uid.jpg');
     File file = File(path);
-    await ref.putFile(file);
-    String url = await ref.getDownloadURL();
+    UploadTask uploadTask = ref.putFile(file);
+    TaskSnapshot snapshot = await uploadTask;
+    String url = await snapshot.ref.getDownloadURL();
     return url;
   }
 }

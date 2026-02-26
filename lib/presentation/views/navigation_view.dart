@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/auth_cubit.dart';
+import 'package:musa/business_logic/cubit/profile_cubit.dart';
 import 'package:musa/presentation/views/cart_view.dart';
 import 'package:musa/presentation/views/favoritView.dart';
 import 'package:musa/presentation/views/home_screen.dart';
@@ -18,6 +19,7 @@ class NavigationView extends StatefulWidget {
 }
 
 class _NavigationViewState extends State<NavigationView> {
+ 
   DateTime? lastPressed;
   int currentIndex = 0;
   @override
@@ -44,11 +46,14 @@ class _NavigationViewState extends State<NavigationView> {
           ).showSnackBar(SnackBar(content: Text("Press back again to exit")));
           return false;
         }
-
         return true;
       },
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
+          if(state is AuthAuthenticated)
+          {
+            context.read<ProfileCubit>().getProfile();
+          }
           if (state is AuthUnAuthenticated) {
             Navigator.pushAndRemoveUntil(
               context,

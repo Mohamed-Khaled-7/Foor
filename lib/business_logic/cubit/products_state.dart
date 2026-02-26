@@ -16,4 +16,7 @@ class ProductsError extends ProductsState {
   ProductsError({required this.errMessage});
 }
 
-class SearchedSuccess extends ProductsState {}
+class SearchedSuccess extends ProductsState {
+ final List<ProductModel> SearchedProducts;
+  SearchedSuccess({required this.SearchedProducts});
+}

@@ -40,7 +40,21 @@ class _ProfilePageState extends State<ProfilePage> {
       body: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           if (state is ProfileLoading) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40.0,
+                  vertical: 20,
+                ),
+                child: LinearProgressIndicator(
+                  minHeight: 8, 
+                  backgroundColor: Colors.grey[300], 
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Colors.blueAccent,
+                  ), 
+                ),
+              ),
+            );
           }
           if (state is ProfileLoaded) {
             return ProfileBody(profile: state.profileModel);

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,12 +64,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           var name = context.read<ProfileCubit>().getName() ?? 'user';
+
           return Row(
             children: [
               CircleAvatar(
                 radius: 25,
-                backgroundImage: NetworkImage(
-                  'https://i.pravatar.cc/150?img=3',
+                backgroundImage: CachedNetworkImageProvider(
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
                 ),
               ),
               const SizedBox(width: 12),

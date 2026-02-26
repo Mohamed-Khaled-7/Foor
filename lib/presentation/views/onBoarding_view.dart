@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:musa/const/const.dart';
 import 'package:musa/data/models/onBoardingModel.dart';
 import 'package:musa/presentation/views/register_view.dart';
 import 'package:musa/presentation/views/login_view.dart';
@@ -64,6 +66,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   InkWell(
                     onTap: () {
                       if (currentIndex == 2) {
+                        var box = Hive.box(onBoarding);
+                        box.put('isFirstTime', false);
                         Navigator.pushNamed(context, LoginPage.id);
                       } else {
                         pageController.animateToPage(
@@ -84,7 +88,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                   InkWell(
                     onTap: () {
+                      var box = Hive.box(onBoarding);
                       if (currentIndex == 2) {
+                        box.put('isFirstTime', false);
                         Navigator.pushNamed(context, RegisterView.id);
                       } else {
                         pageController.nextPage(

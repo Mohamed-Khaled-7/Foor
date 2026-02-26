@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musa/business_logic/cubit/auth_cubit.dart';
@@ -40,6 +41,7 @@ void main() async {
   await Hive.openBox<ProductModel>(CartBox);
   Hive.registerAdapter(ProfileModelAdapter());
   await Hive.openBox<ProfileModel>(ProfileBox);
+  await Hive.openBox(onBoarding);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(Foor());
 }
@@ -68,6 +70,8 @@ class Foor extends StatelessWidget {
   Foor({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var box = Hive.box(onBoarding);
+    bool isFirstTime = box.get('isFirstTime',defaultValue:true);
     return MultiBlocProvider(
       providers: [
         BlocProvider(

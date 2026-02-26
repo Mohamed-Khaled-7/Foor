@@ -17,18 +17,17 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProfileModel(
-      firstName: fields[0] as String,
-      lastName: fields[1] as String,
-      email: fields[2] as String,
-      user: fields[3] as String,
-      image: fields[4] as String?,
+      firstName: fields[0] as String?,
+      lastName: fields[1] as String?,
+      email: fields[2] as String?,
+      user: fields[3] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ProfileModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.firstName)
       ..writeByte(1)
@@ -36,9 +35,7 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
       ..writeByte(2)
       ..write(obj.email)
       ..writeByte(3)
-      ..write(obj.user)
-      ..write(4)
-      ..write(obj.image);
+      ..write(obj.user);
   }
 
   @override

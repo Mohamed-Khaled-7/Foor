@@ -48,36 +48,17 @@ class _ProfileBodyState extends State<ProfileBody> {
                 height: 150,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.blueAccent, width: 2),
+                  border: Border.all(color: Colors.blueAccent, width: 3),
                 ),
                 child: ClipOval(
-                  child: widget.profile.image != null
-                      ? CachedNetworkImage(
-                          imageUrl: widget.profile.image!,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.person, size: 50),
-                        )
-                      : const Icon(Icons.person, size: 50),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    context.read<ProfileCubit>().updateProfileImage();
-                  },
-                  child: const CircleAvatar(
-                    backgroundColor: Colors.blueAccent,
-                    radius: 20,
-                    child: Icon(
-                      LucideIcons.camera,
-                      color: Colors.white,
-                      size: 20,
-                    ),
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.person, size: 50),
                   ),
                 ),
               ),
@@ -156,7 +137,6 @@ class _ProfileBodyState extends State<ProfileBody> {
                   lastName: lastNameController.text,
                   email: emailController.text,
                   user: userController.text,
-                  image: widget.profile.image,
                 );
                 context.read<ProfileCubit>().updateProfile(updatedProfile);
               },
@@ -168,7 +148,7 @@ class _ProfileBodyState extends State<ProfileBody> {
         const SizedBox(height: 10),
         IconButton(
           onPressed: () {
-            context.read<AuthCubit>().logOut();
+            context.read<AuthCubit>().confirmSignOut(context);
           },
           icon: const Icon(LucideIcons.logOut, color: Colors.red),
         ),

@@ -12,7 +12,7 @@ class ProfileDataSource {
   getName() {
     var profile = profileBox.get('currentUser');
     if (profile != null) {
-      return profile.firstName + ' ' + profile.lastName;
+      return profile.firstName! + ' ' + profile.lastName!;
     }
     return 'Guest User';
   }
@@ -25,13 +25,5 @@ class ProfileDataSource {
     await profileBox.put('currentUser', profile);
   }
 
-  Future<String?> pickImage() async {
-    final picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      return image.path;
-    } else {
-      return null;
-    }
-  }
+  
 }

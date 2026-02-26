@@ -18,14 +18,14 @@ class ProductsCubit extends Cubit<ProductsState> {
           .where(
             (product) =>
                 product.title.toLowerCase().contains(
-                  product.title.toLowerCase(),
+                  query.toLowerCase(),
                 ) ||
                 product.description.toLowerCase().contains(
-                  product.description.toLowerCase(),
+                  query.toLowerCase(),
                 ),
           )
           .toList();
-      emit(SearchedSuccess());
+      emit(SearchedSuccess(SearchedProducts: productsSearched));
     }
   }
 Future<void>getAllProducts({required String url}) async{

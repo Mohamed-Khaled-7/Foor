@@ -8,7 +8,6 @@ import 'package:musa/presentation/widget/customCard.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   ProductModel? product;
-  List<ProductModel> results = [];
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [IconButton(onPressed: () => query = '', icon: Icon(LucideIcons.x))];
@@ -27,39 +26,45 @@ class CustomSearchDelegate extends SearchDelegate {
     );
   }
 
-  void search(BuildContext context) {
-    context.read<ProductsCubit>().searcheProducts(query);
-    results = context.read<ProductsCubit>().productsSearched;
-  }
-
   @override
   Widget buildResults(BuildContext context) {
-    search(context);
-    if (results.isEmpty) {
-      return Center(
-        child: Text(
-          'No resultls founded',
-          style: GoogleFonts.poppins(fontSize: 23, color: Colors.white),
-        ),
-      );
-    } else {
-      results = results
-          .where(
-            (product) =>
-                product.title.toLowerCase().contains(query.toLowerCase()) ||
-                product.description.toLowerCase().contains(query.toLowerCase()),
-          )
-          .toList();
-    }
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      itemBuilder: (context, index) {
-        return CustomCard(
-          product: results[index],
-          key: ValueKey(results[index].key),
-        );
+    context.read<ProductsCubit>().searcheProducts(query);
+    return BlocBuilder<ProductsCubit, ProductsState>(
+      builder: (context, state) {
+        if (state is ProductsLoading) {
+          return const Center(
+            child: CircularProgressIndicator(color: Colors.blueAccent),
+          );
+        }
+        if (state is SearchedSuccess) {
+          final results = state.SearchedProducts;
+          if (results.isEmpty) {
+            return Center(
+              child: Text(
+                'No resultls founded',
+                style: GoogleFonts.poppins(fontSize: 23, color: Colors.white),
+              ),
+            );
+          }
+          return ListView.builder(
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              return CustomCard(
+                product: results[index],
+                key: ValueKey(results[index].key),
+              );
+            },
+            itemCount: results.length,
+          );
+        } else {
+          return Center(
+            child: Text(
+              'No resultls founded',
+              style: GoogleFonts.poppins(fontSize: 23, color: Colors.white),
+            ),
+          );
+        }
       },
-      itemCount: results.length,
     );
   }
 
