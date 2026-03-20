@@ -97,7 +97,7 @@ class AuthCubit extends Cubit<AuthState> {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
+              onPressed: ()=>Navigator.of(context).pop(false),
               child: Text(
                 'Cancel',
                 style: GoogleFonts.poppins(

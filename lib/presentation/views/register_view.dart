@@ -72,6 +72,7 @@ class _RegisterViewState extends State<RegisterView> {
               backgroundColor: Colors.green[700],
               icons: LucideIcons.checkCircle,
             );
+            Navigator.pop(context);
           }
         },
         child: Form(
@@ -172,7 +173,11 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     label: const Text('Password'),
                     labelStyle: GoogleFonts.poppins(
-                      color: Colors.black,
+                      color: Colors.grey[500],
+                      fontWeight: FontWeight.bold,
+                    ),
+                    hintStyle: GoogleFonts.poppins(
+                      color: Colors.grey[500],
                       fontWeight: FontWeight.bold,
                     ),
                     filled: true,
@@ -210,6 +215,7 @@ class _RegisterViewState extends State<RegisterView> {
                           email!,
                           password!,
                         );
+                        Navigator.pop(context);
                       }
                     },
                   ),

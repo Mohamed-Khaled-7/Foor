@@ -12,9 +12,7 @@ class CustomListProducts extends StatelessWidget {
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is ProductsLoading)
-          return const Center(
-            child: CircularProgressIndicator(color: Colors.blueAccent),
-          );
+          return const Center(child: CircularProgressIndicator());
         if (state is ProductsLoaded) {
           return GridView.builder(
             shrinkWrap: true,

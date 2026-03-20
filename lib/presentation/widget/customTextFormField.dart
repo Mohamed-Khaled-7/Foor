@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class CustomTextField extends StatelessWidget {
   Function(String) onChange;
   final bool enabled;
@@ -41,11 +40,11 @@ class CustomTextField extends StatelessWidget {
             : null,
         hintText: hintText,
         labelStyle: GoogleFonts.poppins(
-          color: Colors.grey[800],
+          color: Colors.grey[500],
           fontWeight: FontWeight.bold,
         ),
         hintStyle: GoogleFonts.poppins(
-          color: Colors.grey[700],
+          color: Colors.grey[500],
           fontWeight: FontWeight.bold,
         ),
         floatingLabelStyle: GoogleFonts.poppins(color: const Color(0xFF000000)),

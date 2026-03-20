@@ -67,7 +67,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     onTap: () {
                       if (currentIndex == 2) {
                         var box = Hive.box(onBoarding);
-                        box.put('isFirstTime', false);
+                        box.put('isFirstTime',false);
                         Navigator.pushNamed(context, LoginPage.id);
                       } else {
                         pageController.animateToPage(

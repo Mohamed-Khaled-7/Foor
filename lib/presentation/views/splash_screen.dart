@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:musa/const/const.dart';
+import 'package:musa/presentation/views/home_screen.dart';
+import 'package:musa/presentation/views/login_view.dart';
+import 'package:musa/presentation/views/navigation_view.dart';
 import 'package:musa/presentation/views/onBoarding_view.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -58,10 +64,10 @@ class _SplashScreenState extends State<SplashScreen>
                 );
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric( horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
-                  alignment: Alignment.center,        
+                  alignment: Alignment.center,
                   child: Text(
                     'Smart Shopping',
                     style: GoogleFonts.pacifico(
@@ -91,7 +97,16 @@ class _SplashScreenState extends State<SplashScreen>
                   totalRepeatCount: 1,
                   onFinished: () {
                     Future.delayed(const Duration(seconds: 1), () {
-                      Navigator.pushNamed(context, OnBoardingScreen.id);
+                      var box = Hive.box(onBoarding);
+                      bool seen = box.get('isFirstTime', defaultValue: true);
+                      var user = FirebaseAuth.instance.currentUser;
+                      if (seen) {
+                        Navigator.pushNamed(context, OnBoardingScreen.id);
+                      } else if (user != null) {
+                        Navigator.pushNamed(context, NavigationView.id);
+                      } else {
+                        Navigator.pushNamed(context, LoginPage.id);
+                      }
                     });
                   },
                 ),

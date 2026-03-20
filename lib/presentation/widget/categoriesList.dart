@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:musa/business_logic/cubit/categories_cubit.dart';
 import 'package:musa/business_logic/cubit/products_cubit.dart';
 import 'package:musa/presentation/widget/categoryItem.dart';
-
 
 class CategoryList extends StatefulWidget {
   const CategoryList({super.key});
@@ -23,11 +23,7 @@ class _CategoryListState extends State<CategoryList> {
     return BlocBuilder<CategoriesCubit, CategoriesState>(
       builder: (context, state) {
         if (state is CategoriesLoading) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Color.fromARGB(255, 70, 92, 218),
-            ),
-          );
+          return const Center(child: Text('Loading....'));
         } else if (state is CategoriesLoaded) {
           context.read<ProductsCubit>().getAllProducts(
             url: 'https://dummyjson.com/products',
@@ -46,7 +42,12 @@ class _CategoryListState extends State<CategoryList> {
             ),
           );
         } else {
-          return CircularProgressIndicator();
+          return Center(
+            child: Text(
+              'Loading......',
+              style: GoogleFonts.poppins(fontSize: 23),
+            ),
+          );
         }
       },
     );
