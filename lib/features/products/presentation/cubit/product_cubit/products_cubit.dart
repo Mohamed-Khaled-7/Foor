@@ -10,23 +10,26 @@ class ProductsCubit extends Cubit<ProductsState> {
   Future<void> getAllProducts() async {
     try {
       emit(ProductsLoading());
-      final products = await repo.getProducts(url: 'https://dummyjson.com/products');
+      final products = await repo.getProducts(
+        url: 'https://dummyjson.com/products',
+      );
       emit(ProductsLoaded(products: products));
     } on Exception catch (e) {
       emit(ProductsError(errMessage: e.toString()));
     }
   }
-  Future<void> getProductsByCategory(String category) async {
-  try {
-    emit(ProductsLoading());
 
-    final products = await repo.getProducts(
-      url: 'https://dummyjson.com/products/category/$category',
-    );
+  Future<void> getProductsByCategory({required String url}) async {
+    try {
+      emit(ProductsLoading());
 
-    emit(ProductsLoaded(products: products));
-  } catch (e) {
-    emit(ProductsError(errMessage: e.toString()));
+      final products = await repo.getProducts(
+        url: url,
+      );
+
+      emit(ProductsLoaded(products: products));
+    } catch (e) {
+      emit(ProductsError(errMessage: e.toString()));
+    }
   }
-}
 }

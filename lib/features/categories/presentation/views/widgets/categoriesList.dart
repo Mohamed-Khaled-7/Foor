@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musa/business_logic/cubit/categories_cubit.dart';
-import 'package:musa/business_logic/cubit/products_cubit.dart';
-import 'package:musa/presentation/widget/categoryItem.dart';
+import 'package:musa/features/products/presentation/cubit/product_cubit/products_cubit.dart';
+import 'package:musa/features/categories/presentation/views/widgets/categoryItem.dart';
 
 class CategoryList extends StatefulWidget {
   const CategoryList({super.key});
@@ -26,7 +26,7 @@ class _CategoryListState extends State<CategoryList> {
         if (state is CategoriesLoading) {
           return const Center(child: Text('Loading....'));
         } else if (state is CategoriesLoaded) {
-          context.read<ProductsCubit>().getAllProducts(
+          context.read<ProductsCubit>().getProductsByCategory(
             url: 'https://dummyjson.com/products',
           );
           return SizedBox(

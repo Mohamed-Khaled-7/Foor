@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musa/business_logic/cubit/products_cubit.dart';
-import 'package:musa/presentation/widget/categoriesList.dart';
+import 'package:musa/features/categories/presentation/views/widgets/categoriesList.dart';
 import 'package:musa/presentation/widget/customAppBar.dart';
 import 'package:musa/presentation/widget/customHeader.dart';
 import 'package:musa/presentation/widget/customSearchField.dart';

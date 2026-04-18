@@ -14,6 +14,4 @@ class ProductsImpl implements ProductsRepo {
       return ProductModel.fromJson(product).toEntity();
     }).toList();
   }
-
-
 }
