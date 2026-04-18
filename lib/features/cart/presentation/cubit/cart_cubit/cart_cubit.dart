@@ -1,16 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musa/data/models/product_model.dart';
-import 'package:musa/data/repository/cart_repository.dart';
+import 'package:musa/features/cart/domain/repo/cart_repo.dart';
+import 'package:musa/features/products/data/models/product_model.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  final CartRepository cartRepository;
-
-  CartCubit({required this.cartRepository}) : super(CartInitial()) {
-    fetchAllCarts();
-  }
-  void fetchAllCarts() {
+  CartCubit({required this.cartRepository}) : super(CartInitial());
+  CartRepository cartRepository;
+   void fetchAllCarts() {
     final items = cartRepository.fetchAllCarts();
     if (items.isEmpty) {
       emit(CartEmpty());
@@ -18,7 +15,6 @@ class CartCubit extends Cubit<CartState> {
       emit(CartLoaded(cartItems: items));
     }
   }
-
   void addCart(ProductModel product) {
     cartRepository.addCart(product);
     fetchAllCarts();
@@ -40,12 +36,11 @@ class CartCubit extends Cubit<CartState> {
   }
 
   double totalPrice() => cartRepository.totalPrice();
-  int itemQuntity(ProductModel productModel){
+  int itemQuntity(ProductModel productModel) {
     return cartRepository.itemQuntity(productModel);
   }
-  getItemCount(){
+
+  getItemCount() {
     return cartRepository.getItemCount();
   }
-  
 }
-

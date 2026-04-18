@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/cart_cubit.dart';
-import 'package:musa/presentation/widget/cart_body.dart';
+import 'package:musa/features/products/cart_body.dart';
 import 'package:musa/presentation/widget/customCartButton.dart';
 
 class CartView extends StatefulWidget {

@@ -7,7 +7,7 @@ import 'package:musa/business_logic/cubit/categories_cubit.dart';
 import 'package:musa/business_logic/cubit/favoriate_cubit.dart';
 import 'package:musa/business_logic/cubit/profile_cubit.dart';
 import 'package:musa/core/const/const.dart';
-import 'package:musa/data/datasource/local/cart_local_datasource.dart';
+import 'package:musa/features/cart/data/data_source/local/cart_local_datasource.dart';
 import 'package:musa/data/datasource/local/favoriate_local_datasoure.dart';
 import 'package:musa/data/datasource/local/local_profile_datascource.dart';
 import 'package:musa/data/models/profile_model.dart';

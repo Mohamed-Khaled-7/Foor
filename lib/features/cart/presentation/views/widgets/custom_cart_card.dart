@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:musa/business_logic/cubit/cart_cubit.dart';
-
-import 'package:musa/data/models/product_model.dart';
+import 'package:musa/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
+import 'package:musa/features/products/data/models/product_model.dart';
 import 'package:musa/presentation/widget/customSmallButtom.dart';
-
 import 'package:shimmer/shimmer.dart';
-
 class CustomCartCard extends StatefulWidget {
   CustomCartCard({Key? key, required this.product}) : super(key: key);
   ProductModel product;
