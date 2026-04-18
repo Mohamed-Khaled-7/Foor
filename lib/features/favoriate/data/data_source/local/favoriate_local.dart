@@ -1,6 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:musa/core/const/const.dart';
-import 'package:musa/data/models/product_model.dart';
+import 'package:musa/features/products/data/models/product_model.dart';
 
 class FavoriateLocalDatasoure {
   var favBox = Hive.box<ProductModel>(FavoritesBox);

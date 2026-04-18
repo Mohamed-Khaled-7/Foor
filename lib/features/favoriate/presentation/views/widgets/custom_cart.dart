@@ -7,8 +7,8 @@ import 'package:musa/features/favoriate/presentation/cubit/cubit/favoriate_cubit
 import 'package:musa/features/products/data/models/product_model.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CustomCard extends StatelessWidget {
-  CustomCard({Key? key, required this.product}) : super(key: key);
+class CustomFavoriateCard extends StatelessWidget {
+  const CustomFavoriateCard({Key? key, required this.product}) : super(key: key);
   final ProductModel product;
   @override
   Widget build(BuildContext context) {
