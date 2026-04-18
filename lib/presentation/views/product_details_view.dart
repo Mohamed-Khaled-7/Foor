@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/cart_cubit.dart';
 import 'package:musa/business_logic/cubit/favoriate_cubit.dart';
-import 'package:musa/const/const.dart';
 import 'package:musa/data/datasource/local/favoriate_local_datasoure.dart';
-import 'package:musa/data/models/product_model.dart';
 import 'package:musa/data/repository/favoriate_repository.dart';
-import 'package:musa/presentation/widget/customSmallButtom.dart';
+import 'package:musa/features/products/data/models/product_model.dart';
 import 'package:musa/presentation/widget/customSnakPar.dart';
 import 'package:musa/presentation/widget/custom_addcard_buttom.dart';
 
 class CustomProductDetails extends StatefulWidget {
-  CustomProductDetails({super.key});
+  const CustomProductDetails({super.key});
   static final id = 'CustomProductDetails';
-
   @override
   State<CustomProductDetails> createState() => _CustomProductDetailsState();
 }
-
 class _CustomProductDetailsState extends State<CustomProductDetails> {
   int index = 1;
   FavoriateRepository favoriateRepository = FavoriateRepository(
     favoriateLocalDatasoure: FavoriateLocalDatasoure(),
   );
-
   @override
   Widget build(BuildContext context) {
     ProductModel? productModel =
@@ -59,7 +53,7 @@ class _CustomProductDetailsState extends State<CustomProductDetails> {
             left: 10,
             child: SafeArea(
               child: CircleAvatar(
-                backgroundColor: Colors.white.withOpacity(0.7),
+                backgroundColor: Colors.white.withValues(alpha: 0.7),
                 child: IconButton(
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(LucideIcons.arrowLeft, color: Colors.grey),

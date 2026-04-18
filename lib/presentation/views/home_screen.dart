@@ -5,7 +5,7 @@ import 'package:musa/presentation/widget/categoriesList.dart';
 import 'package:musa/presentation/widget/customAppBar.dart';
 import 'package:musa/presentation/widget/customHeader.dart';
 import 'package:musa/presentation/widget/customSearchField.dart';
-import 'package:musa/presentation/widget/custom_list_products.dart';
+import 'package:musa/features/products/presentation/views/widgets/custom_list_products.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

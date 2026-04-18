@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:hive_flutter/adapters.dart';
 
-import 'package:musa/const/const.dart';
+import 'package:musa/core/const/const.dart';
 import 'package:musa/data/datasource/local/favoriate_local_datasoure.dart';
 import 'package:musa/data/models/product_model.dart';
 

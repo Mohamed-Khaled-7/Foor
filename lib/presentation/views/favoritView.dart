@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:musa/const/const.dart';
-import 'package:musa/data/models/product_model.dart';
-import 'package:musa/presentation/widget/customCard.dart';
+import 'package:musa/core/const/const.dart';
+import 'package:musa/features/products/data/models/product_model.dart';
+import 'package:musa/features/products/presentation/views/widgets/customCard.dart';
 
 class FavoritesView extends StatelessWidget {
   const FavoritesView({super.key});

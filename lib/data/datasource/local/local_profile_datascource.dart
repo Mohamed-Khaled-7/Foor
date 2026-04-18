@@ -1,6 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:musa/const/const.dart';
+import 'package:musa/core/const/const.dart';
 import 'package:musa/data/models/profile_model.dart';
 
 class ProfileDataSource {
@@ -9,7 +8,7 @@ class ProfileDataSource {
     return profileBox.containsKey('currentUser');
   }
 
-  getName() {
+  String getName() {
     var profile = profileBox.get('currentUser');
     if (profile != null) {
       return profile.firstName! + ' ' + profile.lastName!;
@@ -23,7 +22,5 @@ class ProfileDataSource {
 
   Future<void> saveProfile(ProfileModel profile) async {
     await profileBox.put('currentUser', profile);
-  }
-
-  
+  }  
 }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/cart_cubit.dart';
-import 'package:musa/presentation/widget/customCard.dart';
+import 'package:musa/features/products/presentation/views/widgets/customCard.dart';
 import 'package:musa/presentation/widget/custom_cart_card.dart';
 
 class CartBody extends StatelessWidget {

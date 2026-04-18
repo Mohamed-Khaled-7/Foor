@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/products_cubit.dart';
 import 'package:musa/data/models/product_model.dart';
-import 'package:musa/presentation/widget/customCard.dart';
+import 'package:musa/features/products/presentation/views/widgets/customCard.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   ProductModel? product;
@@ -25,7 +25,6 @@ class CustomSearchDelegate extends SearchDelegate {
       },
     );
   }
-
   @override
   Widget buildResults(BuildContext context) {
     context.read<ProductsCubit>().searcheProducts(query);

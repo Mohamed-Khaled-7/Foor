@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:musa/const/const.dart';
+import 'package:musa/core/const/const.dart';
 import 'package:musa/data/models/product_model.dart';
 
 class CartLocalDataSource {

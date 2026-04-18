@@ -1,3 +1,5 @@
+import 'package:musa/features/products/domain/entities/category.dart';
+
 class CategoryModel {
   final String name;
   final String url;
@@ -70,6 +72,9 @@ class CategoryModel {
       slug: slugValue,
       image: _categoryImages[slugValue] ?? "https://via.placeholder.com/400",
     );
+  }
+  Category toEntity() {
+    return Category(title: name, image: image);
   }
 
   Map<String, dynamic> toJson() {

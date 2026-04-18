@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hive/hive.dart';
-import 'package:musa/const/const.dart';
+import 'package:musa/core/const/const.dart';
 import 'package:musa/data/datasource/local/local_profile_datascource.dart';
 import 'package:musa/data/models/profile_model.dart';
 

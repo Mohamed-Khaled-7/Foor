@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:musa/presentation/widget/custom_search_delegate.dart';
+import 'package:musa/features/products/presentation/views/custom_search_delegate.dart';
 
 class CustomTextSearch extends StatelessWidget {
   const CustomTextSearch({super.key});

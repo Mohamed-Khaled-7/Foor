@@ -4,19 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/favoriate_cubit.dart';
-import 'package:musa/data/models/product_model.dart';
+import 'package:musa/features/products/data/models/product_model.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CustomCard extends StatefulWidget {
+class CustomCard extends StatelessWidget {
   CustomCard({Key? key, required this.product}) : super(key: key);
-  ProductModel product;
-  @override
-  State<CustomCard> createState() => _CustomCardState();
-}
-
-class _CustomCardState extends State<CustomCard> {
-  
-
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     
@@ -27,7 +20,7 @@ class _CustomCardState extends State<CustomCard> {
           Navigator.pushNamed(
             context,
             'CustomProductDetails',
-            arguments: widget.product,
+            arguments: product,
           );
         },
         child: Container(
@@ -37,7 +30,7 @@ class _CustomCardState extends State<CustomCard> {
             boxShadow: [
               BoxShadow(
                 blurRadius: 20,
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 offset: const Offset(0, 5),
               ),
             ],
@@ -57,7 +50,7 @@ class _CustomCardState extends State<CustomCard> {
                       bottom: 4,
                     ),
                     child: Text(
-                      '${widget.product.discountPercentage}%',
+                      '${product.discountPercentage}%',
                       style: GoogleFonts.poppins(fontSize: 17),
                     ),
                   ),
@@ -85,13 +78,13 @@ class _CustomCardState extends State<CustomCard> {
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.broken_image),
                       fit: BoxFit.cover,
-                      imageUrl: '${widget.product.thumbnail}',
+                      imageUrl: '${product.thumbnail}',
                     ),
                   ),
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  widget.product.title,
+                  product.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
@@ -104,7 +97,7 @@ class _CustomCardState extends State<CustomCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '\$${widget.product.price.toString()}',
+                      '\$${product.price.toString()}',
                       style: GoogleFonts.montserrat(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -114,10 +107,10 @@ class _CustomCardState extends State<CustomCard> {
                    BlocBuilder<FavoriateCubit, FavoriateState>(
                       
                       builder: (context,state) {
-                       var isFav =context.read<FavoriateCubit>().isFav(widget.product);
+                       var isFav =context.read<FavoriateCubit>().isFav(product);
                         return GestureDetector(
                           onTap: () =>
-                              context.read<FavoriateCubit>().addOrRemoveFav(widget.product),
+                              context.read<FavoriateCubit>().addOrRemoveFav(product),
                           child: Icon(
                             isFav ? Icons.favorite : LucideIcons.heart,
                             color: isFav ? Colors.red : Colors.grey,

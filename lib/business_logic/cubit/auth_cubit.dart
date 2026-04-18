@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/business_logic/cubit/profile_cubit.dart';
-import 'package:musa/const/const.dart';
+import 'package:musa/core/const/const.dart';
 import 'package:musa/data/models/profile_model.dart';
 import 'package:musa/main.dart';
 import 'package:musa/presentation/views/login_view.dart';
@@ -54,7 +54,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(
         AuthAuthenticated(user: auth.currentUser!, source: AuthSource.Register),
       );
-    } on Exception catch (e) {
+    } on FirebaseException catch (e) {
       emit(AuthError(errMessage: e.toString()));
     }
   }

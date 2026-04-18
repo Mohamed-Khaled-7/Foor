@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:musa/features/products/domain/entities/product.dart';
 
 part 'product_model.g.dart';
 
@@ -33,6 +34,14 @@ class ProductModel extends HiveObject {
     required this.thumbnail,
     required this.category,
   });
+  Product toEntity(){
+    return Product(
+      discountPercentage: discountPercentage,
+      image: thumbnail,
+      title: title,
+      price: price,
+    );
+  }
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(

@@ -36,7 +36,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       emit(ProfileLoading());
       var uid = Repo.getCurrentUid();
-      await Repo.UpdateProfile(uid, profile); //من السيرفر
+      await Repo.UpdateProfile(uid, profile);
       Repo.saveProfileLocal(profile); //in local
       emit(ProfileLoaded(profileModel: profile));
     } catch (e) {
@@ -48,7 +48,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     return Repo.getName();
   }
 
- 
   void resetProfile() {
     emit(ProfileInitial());
   }

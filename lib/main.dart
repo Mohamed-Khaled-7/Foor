@@ -1,26 +1,23 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musa/business_logic/cubit/auth_cubit.dart';
 import 'package:musa/business_logic/cubit/cart_cubit.dart';
 import 'package:musa/business_logic/cubit/categories_cubit.dart';
 import 'package:musa/business_logic/cubit/favoriate_cubit.dart';
-import 'package:musa/business_logic/cubit/products_cubit.dart';
 import 'package:musa/business_logic/cubit/profile_cubit.dart';
-import 'package:musa/const/const.dart';
+import 'package:musa/core/const/const.dart';
 import 'package:musa/data/datasource/local/cart_local_datasource.dart';
 import 'package:musa/data/datasource/local/favoriate_local_datasoure.dart';
 import 'package:musa/data/datasource/local/local_profile_datascource.dart';
-import 'package:musa/data/models/product_model.dart';
 import 'package:musa/data/models/profile_model.dart';
 import 'package:musa/data/repository/cart_repository.dart';
 import 'package:musa/data/repository/favoriate_repository.dart';
-import 'package:musa/data/repository/get_all_categories_repo.dart';
-import 'package:musa/data/repository/get_all_products_repo.dart';
-import 'package:musa/data/datasource/remote/services/get_all_categories.dart';
-import 'package:musa/data/datasource/remote/services/get_all_products.dart';
 import 'package:musa/data/repository/proifle_repository.dart';
+import 'package:musa/features/products/data/models/product_model.dart';
+import 'package:musa/features/products/presentation/cubit/product_cubit/products_cubit.dart';
 import 'package:musa/firebase_options.dart';
+import 'package:musa/generated/l10n.dart';
 import 'package:musa/presentation/views/home_screen.dart';
 import 'package:musa/presentation/views/navigation_view.dart';
 import 'package:musa/presentation/views/profile_view.dart';
@@ -70,8 +67,6 @@ class Foor extends StatelessWidget {
   Foor({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var box = Hive.box(onBoarding);
-    bool isFirstTime = box.get('isFirstTime',defaultValue:true);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -87,6 +82,13 @@ class Foor extends StatelessWidget {
         BlocProvider(create: (context) => profileCubit),
       ],
       child: MaterialApp(
+        localizationsDelegates: [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
         routes: {
           HomeScreen.id: (context) => HomeScreen(),
           CartView.id: (context) => CartView(),

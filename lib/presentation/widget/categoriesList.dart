@@ -13,6 +13,7 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
+  @override
   void initState() {
     super.initState();
     context.read<CategoriesCubit>().getAllCategories();

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
-import 'package:musa/const/const.dart';
+import 'package:musa/core/const/const.dart';
 import 'package:musa/data/models/product_model.dart';
 import 'package:musa/data/repository/favoriate_repository.dart';
 
