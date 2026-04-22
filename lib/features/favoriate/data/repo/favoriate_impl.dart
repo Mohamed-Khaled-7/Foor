@@ -1,22 +1,24 @@
+import 'package:musa/core/shared/product_model.dart';
 import 'package:musa/features/favoriate/data/data_source/local/favoriate_local.dart';
+import 'package:musa/features/favoriate/domain/entites/favoriate.dart';
 import 'package:musa/features/favoriate/domain/repo/favoriate_repo.dart';
-import 'package:musa/features/products/data/models/product_model.dart';
 
 class FavoriateRepositoryImpl implements FavoriteRepository {
-  final FavoriateLocalDatasoure favoriateLD;
-  FavoriateRepositoryImpl({required this.favoriateLD});
+  final FavoriateLocalDataSoure favoriateDS;
+  FavoriateRepositoryImpl({required this.favoriateDS});
   @override
-  void addOrRemoveFav(ProductModel productModel) {
-    favoriateLD.addOrRemoveFav(productModel);
+  void addOrRemoveFav(Product product) {
+    final model = ProductModel.fromEntity(product);
+    favoriateDS.addOrRemoveFav(model);
   }
 
   @override
-  List<ProductModel> getAllFav() {
-    return favoriateLD.getAllFav();
+  List<Product> getAllFav() {
+    return favoriateDS.getAllFav();
   }
 
   @override
-  bool isFav(ProductModel productModel) {
-    return favoriateLD.isFav(productModel);
+  bool isFav(Product product) {
+    return favoriateDS.isFav(product);
   }
 }

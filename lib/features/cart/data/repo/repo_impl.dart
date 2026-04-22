@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:musa/core/shared/product_model.dart';
 import 'package:musa/features/cart/data/data_source/local/cart_local_datasource.dart';
 import 'package:musa/features/cart/domain/repo/cart_repo.dart';
-import 'package:musa/features/products/data/models/product_model.dart';
 
 class CartRepoImpl implements CartRepository {
   CartLocalDataSource cartDataSource;
@@ -52,7 +52,7 @@ class CartRepoImpl implements CartRepository {
   }
 
   @override
-  int itemQuntity(ProductModel productModel) {
+  int itemQuantity(ProductModel productModel) {
     return cartDataSource.getItemQuntity(productModel);
   }
 

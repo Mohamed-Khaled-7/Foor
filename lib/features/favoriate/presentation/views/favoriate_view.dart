@@ -4,10 +4,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/core/const/const.dart';
 import 'package:musa/features/favoriate/presentation/views/widgets/custom_cart.dart';
-import 'package:musa/features/products/data/models/product_model.dart';
+import 'package:musa/features/home/domain/entites/product.dart';
 
-class FavoritesView extends StatelessWidget {
-  const FavoritesView({super.key});
+class FavoriateView extends StatelessWidget {
+  const FavoriateView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class FavoritesView extends StatelessWidget {
         ),
       ),
       body: ValueListenableBuilder(
-        valueListenable: Hive.box<ProductModel>(FavoritesBox).listenable(),
-        builder: (context, Box<ProductModel> box, _) {
+        valueListenable: Hive.box<Product>(FavoritesBox).listenable(),
+        builder: (context, Box<Product> box, _) {
           if (box.values.isEmpty) {
             return Center(
               child: Text(

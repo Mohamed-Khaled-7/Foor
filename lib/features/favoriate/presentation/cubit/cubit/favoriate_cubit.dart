@@ -3,7 +3,7 @@ import 'package:musa/features/favoriate/domain/repo/favoriate_repo.dart';
 part 'favoriate_state.dart';
 
 class FavoriateCubit extends Cubit<FavoriateState> {
-  FavoriateCubit(this.favoriteRepository) : super(FavoriateInitial());
+  FavoriateCubit({required this.favoriteRepository}) : super(FavoriateInitial());
   final FavoriteRepository favoriteRepository;
   void getAllFavoriates() {
     emit(FavoriateLoading());

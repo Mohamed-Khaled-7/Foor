@@ -1,4 +1,4 @@
-import 'package:musa/features/products/data/models/product_model.dart';
+import 'package:musa/core/shared/product_model.dart';
 
 abstract class CartRepository {
   List<ProductModel> fetchAllCarts();
@@ -7,6 +7,6 @@ abstract class CartRepository {
   void updateCart(ProductModel product, int quantity);
   void decreaseCart(ProductModel product);
   double totalPrice();
-  int itemQuntity(ProductModel product);
+  int itemQuantity(ProductModel product);
   String  getItemCount();
 }

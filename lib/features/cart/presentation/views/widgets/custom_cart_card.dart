@@ -1,15 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:musa/core/shared/product.dart';
+import 'package:musa/core/utils/app_routers.dart';
 import 'package:musa/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
-import 'package:musa/features/products/data/models/product_model.dart';
 import 'package:musa/presentation/widget/customSmallButtom.dart';
 import 'package:shimmer/shimmer.dart';
+
 class CustomCartCard extends StatefulWidget {
-  CustomCartCard({Key? key, required this.product}) : super(key: key);
-  ProductModel product;
+  const CustomCartCard({Key? key, required this.product}) : super(key: key);
+  final Product product;
   @override
   State<CustomCartCard> createState() => _CustomCartCardState();
 }
@@ -24,10 +27,9 @@ class _CustomCartCardState extends State<CustomCartCard> {
       padding: const EdgeInsets.all(11.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(
-            context,
-            'CustomProductDetails',
-            arguments: widget.product,
+          GoRouter.of(context).pushReplacement(
+            AppRouters.productDetailsView,
+            extra: widget.product,
           );
         },
         child: Row(
@@ -41,7 +43,7 @@ class _CustomCartCardState extends State<CustomCartCard> {
                 fit: BoxFit.cover,
                 height: 80,
                 width: 80,
-                imageUrl: widget.product.thumbnail,
+                imageUrl: widget.product.image,
                 placeholder: (context, url) => Shimmer.fromColors(
                   child: Container(
                     height: 40,
@@ -67,7 +69,7 @@ class _CustomCartCardState extends State<CustomCartCard> {
                     maxLines: 1,
                     style: GoogleFonts.poppins(
                       color: Colors.black,
-              
+
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
@@ -80,7 +82,9 @@ class _CustomCartCardState extends State<CustomCartCard> {
                         bgColor: Colors.black54,
                         iconColor: Colors.white,
                         onTap: () {
-                          context.read<CartCubit>().decreaseCart(widget.product);
+                          context.read<CartCubit>().decreaseCart(
+                            widget.product,
+                          );
                         },
                       ),
                       const SizedBox(width: 8),

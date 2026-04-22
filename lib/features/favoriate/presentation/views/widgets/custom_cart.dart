@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/features/favoriate/presentation/cubit/cubit/favoriate_cubit.dart';
-import 'package:musa/features/products/data/models/product_model.dart';
+import 'package:musa/features/home/domain/entites/product.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomFavoriateCard extends StatelessWidget {
   const CustomFavoriateCard({Key? key, required this.product}) : super(key: key);
-  final ProductModel product;
+  final Product product;
   @override
   Widget build(BuildContext context) {
     
@@ -78,7 +78,7 @@ class CustomFavoriateCard extends StatelessWidget {
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.broken_image),
                       fit: BoxFit.cover,
-                      imageUrl: '${product.thumbnail}',
+                      imageUrl: '${product.image}',
                     ),
                   ),
                 ),

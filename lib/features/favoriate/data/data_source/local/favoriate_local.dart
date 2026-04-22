@@ -1,8 +1,8 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:musa/core/const/const.dart';
-import 'package:musa/features/products/data/models/product_model.dart';
+import 'package:musa/features/home/data/models/product_model.dart';
 
-class FavoriateLocalDatasoure {
+class FavoriateLocalDataSoure {
   var favBox = Hive.box<ProductModel>(FavoritesBox);
   void addOrRemoveFav(ProductModel productModel) {
     if (favBox.containsKey(productModel.id)) {
@@ -11,8 +11,10 @@ class FavoriateLocalDatasoure {
       favBox.put(productModel.id, productModel);
     }
   }
+
   bool isFav(ProductModel productModel) {
     return favBox.containsKey(productModel.id);
   }
- List<ProductModel> getAllFav()=>favBox.values.toList();
+
+  List<ProductModel> getAllFav() => favBox.values.toList();
 }

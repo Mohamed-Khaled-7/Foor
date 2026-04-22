@@ -1,9 +1,11 @@
-import 'package:musa/features/products/data/models/product_model.dart';
+
+
+import 'package:musa/features/favoriate/domain/entites/favoriate.dart';
 
 abstract class FavoriteRepository {
-  void addOrRemoveFav(ProductModel productModel);
+  void addOrRemoveFav(Product product);
 
-  bool isFav(ProductModel productModel);
+  bool isFav(Product product);
 
-  List<ProductModel> getAllFav();
+  List<Product> getAllFav();
 }
