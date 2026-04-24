@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/core/const/const.dart';
+import 'package:musa/core/shared/product.dart';
 import 'package:musa/features/favoriate/presentation/views/widgets/custom_cart.dart';
-import 'package:musa/features/home/domain/entites/product.dart';
 
 class FavoriateView extends StatelessWidget {
   const FavoriateView({super.key});

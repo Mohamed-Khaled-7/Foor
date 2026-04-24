@@ -10,26 +10,21 @@ import 'package:musa/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart
 import 'package:musa/presentation/widget/customSmallButtom.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CustomCartCard extends StatefulWidget {
-  const CustomCartCard({Key? key, required this.product}) : super(key: key);
+class CustomCartCard extends StatelessWidget {
+  CustomCartCard({Key? key, required this.product}) : super(key: key);
   final Product product;
-  @override
-  State<CustomCartCard> createState() => _CustomCartCardState();
-}
-
-class _CustomCartCardState extends State<CustomCartCard> {
-  bool isFav = false;
+  final bool isFav = false;
   var totalPriceForProduct = 0.0;
   @override
   Widget build(BuildContext context) {
-    totalPriceForProduct = widget.product.quantity * widget.product.price;
+    totalPriceForProduct = product.quantity * product.price;
     return Padding(
       padding: const EdgeInsets.all(11.0),
       child: GestureDetector(
         onTap: () {
           GoRouter.of(context).pushReplacement(
             AppRouters.productDetailsView,
-            extra: widget.product,
+            extra: product,
           );
         },
         child: Row(
@@ -43,7 +38,7 @@ class _CustomCartCardState extends State<CustomCartCard> {
                 fit: BoxFit.cover,
                 height: 80,
                 width: 80,
-                imageUrl: widget.product.image,
+                imageUrl: product.image,
                 placeholder: (context, url) => Shimmer.fromColors(
                   child: Container(
                     height: 40,
@@ -64,7 +59,7 @@ class _CustomCartCardState extends State<CustomCartCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.product.title,
+                    product.title,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: GoogleFonts.poppins(
@@ -83,13 +78,13 @@ class _CustomCartCardState extends State<CustomCartCard> {
                         iconColor: Colors.white,
                         onTap: () {
                           context.read<CartCubit>().decreaseCart(
-                            widget.product,
+                            product,
                           );
                         },
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        '${widget.product.quantity}',
+                        '${product.quantity}',
                         style: GoogleFonts.poppins(
                           fontSize: 17,
                           fontWeight: FontWeight.w600,
@@ -101,7 +96,7 @@ class _CustomCartCardState extends State<CustomCartCard> {
                         bgColor: Colors.blueAccent,
                         iconColor: Colors.white,
                         onTap: () {
-                          context.read<CartCubit>().addCart(widget.product);
+                          context.read<CartCubit>().addCart(product);
                         },
                       ),
                       SizedBox(width: 88),

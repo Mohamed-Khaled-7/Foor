@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
+import 'package:musa/core/shared/product.dart';
 import 'package:musa/features/home/domain/entites/category.dart';
-import 'package:musa/features/home/domain/entites/product.dart';
 import 'package:musa/features/home/domain/repo/home_repo.dart';
 
 part 'home_state.dart';

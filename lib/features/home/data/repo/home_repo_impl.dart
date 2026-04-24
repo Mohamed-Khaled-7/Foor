@@ -1,8 +1,8 @@
+import 'package:musa/core/shared/product.dart';
+import 'package:musa/core/shared/product_model.dart';
 import 'package:musa/features/home/data/data_source/remote/home_remote_ds.dart';
 import 'package:musa/features/home/data/models/category_model.dart';
-import 'package:musa/features/home/data/models/product_model.dart';
 import 'package:musa/features/home/domain/entites/category.dart';
-import 'package:musa/features/home/domain/entites/product.dart';
 import 'package:musa/features/home/domain/repo/home_repo.dart';
 
 class HomeRepoImpl implements HomeRepo {

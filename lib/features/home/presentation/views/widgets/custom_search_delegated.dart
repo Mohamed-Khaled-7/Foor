@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:musa/features/home/domain/entites/product.dart';
+import 'package:musa/core/shared/product.dart';
 import 'package:musa/features/home/presentation/cubit/cubit/home_cubit.dart';
 import 'package:musa/features/home/presentation/views/widgets/custom_product_card.dart';
 

@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:musa/features/home/domain/entites/product.dart';
+import 'package:musa/core/shared/product.dart';
 
 class ProductModel extends HiveObject {
   final int id;
@@ -24,6 +24,7 @@ class ProductModel extends HiveObject {
   });
   Product toEntity() {
     return Product(
+      quantity: quantity,
       category:category,
       rating: rating,
       description: description,

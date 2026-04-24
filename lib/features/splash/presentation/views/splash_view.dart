@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:musa/core/const/const.dart';
-
+import 'package:musa/core/utils/app_routers.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -98,11 +99,13 @@ class _SplashViewState extends State<SplashView>
                       bool seen = box.get('isFirstTime', defaultValue: true);
                       var user = FirebaseAuth.instance.currentUser;
                       if (seen) {
-                        Navigator.pushNamed(context, OnBoardingScreen.id);
+                        GoRouter.of(
+                          context,
+                        ).pushReplacement(AppRouters.onBoardingView);
                       } else if (user != null) {
-                        Navigator.pushNamed(context, NavigationView.id);
+                        GoRouter.of(context).pushReplacement(AppRouters.homeView);
                       } else {
-                        Navigator.pushNamed(context, LoginPage.id);
+                        GoRouter.of(context).pushReplacement(AppRouters.loginView);
                       }
                     });
                   },

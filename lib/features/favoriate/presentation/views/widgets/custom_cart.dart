@@ -1,27 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:musa/core/shared/product.dart';
+import 'package:musa/core/utils/app_routers.dart';
 import 'package:musa/features/favoriate/presentation/cubit/cubit/favoriate_cubit.dart';
-import 'package:musa/features/home/domain/entites/product.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomFavoriateCard extends StatelessWidget {
-  const CustomFavoriateCard({Key? key, required this.product}) : super(key: key);
+  const CustomFavoriateCard({Key? key, required this.product})
+    : super(key: key);
   final Product product;
   @override
   Widget build(BuildContext context) {
-    
     return Padding(
       padding: const EdgeInsets.all(11.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(
+          GoRouter.of(
             context,
-            'CustomProductDetails',
-            arguments: product,
-          );
+          ).pushReplacement(AppRouters.productDetailsView, extra: product);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -104,13 +104,15 @@ class CustomFavoriateCard extends StatelessWidget {
                         color: Colors.black54,
                       ),
                     ),
-                   BlocBuilder<FavoriateCubit, FavoriateState>(
-                      
-                      builder: (context,state) {
-                       var isFav =context.read<FavoriateCubit>().isFav(product);
+                    BlocBuilder<FavoriateCubit, FavoriateState>(
+                      builder: (context, state) {
+                        var isFav = context.read<FavoriateCubit>().isFav(
+                          product,
+                        );
                         return GestureDetector(
-                          onTap: () =>
-                              context.read<FavoriateCubit>().addOrRemoveFav(product),
+                          onTap: () => context
+                              .read<FavoriateCubit>()
+                              .addOrRemoveFav(product),
                           child: Icon(
                             isFav ? Icons.favorite : LucideIcons.heart,
                             color: isFav ? Colors.red : Colors.grey,
