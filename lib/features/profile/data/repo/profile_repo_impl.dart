@@ -5,9 +5,12 @@ import 'package:musa/features/profile/data/models/profile_model.dart';
 import 'package:musa/features/profile/domain/repo/profile_repo.dart';
 
 class ProfileRepoImpl implements ProfileRepo {
-  final GetProfileDataSource remoteDataSource;
+  final RemoteProfileDataSource remoteDataSource;
   final LocalProfileDataSource localDataSource;
-  ProfileRepoImpl({required this.remoteDataSource, required this.localDataSource});
+  ProfileRepoImpl({
+    required this.remoteDataSource,
+    required this.localDataSource,
+  });
 
   @override
   Future<void> createProfile(String uid, profile) {
@@ -38,7 +41,7 @@ class ProfileRepoImpl implements ProfileRepo {
   Future<ProfileModel?> getProfile(String uid) async {
     final local = localDataSource.getProfile();
     if (local != null) return local;
-    final remote = await remoteDataSource.fetchProfile(uid);
+    final remote = await remoteDataSource.fetchProfile(uid: uid);
     if (remote != null) {
       await localDataSource.saveProfile(remote);
       return remote;

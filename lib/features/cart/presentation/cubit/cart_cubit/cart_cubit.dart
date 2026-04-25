@@ -16,34 +16,30 @@ class CartCubit extends Cubit<CartState> {
       emit(CartLoaded(cartItems: items));
     }
   }
+
   void addCart(Product product) {
-    final model = ProductModel.fromEntity(product);
-    cartRepository.addCart(model);
+    cartRepository.addCart(product);
     fetchAllCarts();
   }
 
   void decreaseCart(Product product) {
-    final model = ProductModel.fromEntity(product);
-    cartRepository.decreaseCart(model);
+    cartRepository.decreaseCart(product);
     fetchAllCarts();
   }
 
   void updateCart(Product product, int quantity) {
-    final model = ProductModel.fromEntity(product);
-    cartRepository.updateCart(model, quantity);
+    cartRepository.updateCart(product, quantity);
     fetchAllCarts();
   }
 
   void deleteCart(Product product) {
-    final model = ProductModel.fromEntity(product);
-    cartRepository.deleteCart(model);
+    cartRepository.deleteCart(product);
     fetchAllCarts();
   }
 
   double totalPrice() => cartRepository.totalPrice();
-  int itemQuantity(Product productModel) {
-    final model = ProductModel.fromEntity(productModel);
-    return cartRepository.itemQuantity(model);
+  int itemQuantity(Product product) {
+    return cartRepository.itemQuantity(product);
   }
 
   String getItemCount() {

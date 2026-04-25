@@ -17,16 +17,18 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  setup();
+  
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
+  Hive.registerAdapter(ProfileModelAdapter());
+
   await Hive.openBox<ProductModel>(FavoritesBox);
   await Hive.openBox<ProductModel>(CartBox);
-  Hive.registerAdapter(ProfileModelAdapter());
   await Hive.openBox<ProfileModel>(ProfileBox);
   await Hive.openBox(onBoarding);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  setup();
   runApp(Foor());
 }
 
@@ -37,10 +39,6 @@ class Foor extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => gitIt<HomeCubit>()),
-        BlocProvider(create: (context) => gitIt<CartCubit>()),
-        BlocProvider(create: (context) => gitIt<FavoriateCubit>()),
-        BlocProvider(create: (context) => gitIt<AuthCubit>()),
-        BlocProvider(create: (context) => gitIt<ProfileCubit>()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouters.routers,

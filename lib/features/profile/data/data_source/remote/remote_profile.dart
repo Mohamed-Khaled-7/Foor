@@ -2,11 +2,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:musa/features/profile/data/models/profile_model.dart';
 
-class GetProfileDataSource {
+class RemoteProfileDataSource {
   final FirebaseFirestore firestore;
-  GetProfileDataSource({required this.firestore});
+  RemoteProfileDataSource({required this.firestore});
 
-  Future<ProfileModel?> fetchProfile(String uid) async {
+  Future<ProfileModel?> fetchProfile({required String uid}) async {
     try {
       DocumentSnapshot doc = await firestore.collection('users').doc(uid).get();
       if (doc.exists) {

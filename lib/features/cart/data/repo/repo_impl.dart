@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:musa/core/shared/product.dart';
 import 'package:musa/core/shared/product_model.dart';
 import 'package:musa/features/cart/data/data_source/local/cart_local_datasource.dart';
 import 'package:musa/features/cart/domain/repo/cart_repo.dart';
@@ -8,7 +9,7 @@ class CartRepoImpl implements CartRepository {
   CartRepoImpl({required this.cartDataSource});
 
   @override
-  void addCart(ProductModel product) {
+  void addCart(Product product) {
     final items = cartDataSource.getAllItems();
     ProductModel? existingItem;
     for (var item in items) {
@@ -20,25 +21,26 @@ class CartRepoImpl implements CartRepository {
     if (existingItem != null) {
       existingItem.quantity += 1;
       cartDataSource.updateCart(existingItem, existingItem.quantity);
-    } else {
-      product.quantity = 1;
-      cartDataSource.addToCart(product);
+    } else{
+      existingItem!.quantity = 1;
+      cartDataSource.addToCart(existingItem);
+    }
+  }
+  @override
+  void decreaseCart(Product product) {
+    final model = ProductModel.fromEntity(product);
+    if (model.quantity > 1) {
+      model.quantity -= 1;
+      cartDataSource.updateCart(model, model.quantity);
+    } else if (model.quantity == 1) {
+      cartDataSource.delete(model);
     }
   }
 
   @override
-  void decreaseCart(ProductModel product) {
-    if (product.quantity > 1) {
-      product.quantity -= 1;
-      cartDataSource.updateCart(product, product.quantity);
-    } else if (product.quantity == 1) {
-      cartDataSource.delete(product);
-    }
-  }
-
-  @override
-  void deleteCart(ProductModel productModel) {
-    cartDataSource.delete(productModel);
+  void deleteCart(Product product) {
+    final model = ProductModel.fromEntity(product);
+    cartDataSource.delete(model);
   }
 
   @override
@@ -52,13 +54,15 @@ class CartRepoImpl implements CartRepository {
   }
 
   @override
-  int itemQuantity(ProductModel productModel) {
-    return cartDataSource.getItemQuntity(productModel);
+  int itemQuantity(Product product) {
+    final model = ProductModel.fromEntity(product);
+    return cartDataSource.getItemQuntity(model);
   }
 
   @override
-  void updateCart(ProductModel productModel, int quantity) {
-    cartDataSource.updateCart(productModel, quantity);
+  void updateCart(Product product, int quantity) {
+    final model = ProductModel.fromEntity(product);
+    cartDataSource.updateCart(model, quantity);
   }
 
   @override

@@ -20,11 +20,13 @@ import 'package:musa/features/profile/presentation/cubit/profile_cubit.dart';
 
 final gitIt = GetIt.instance;
 void setup() {
-  gitIt.registerFactory<FirebaseFirestore>(()=> FirebaseFirestore.instance);
-  gitIt.registerFactory<GetProfileDataSource>(
-    () => GetProfileDataSource(firestore: gitIt()),
+  gitIt.registerFactory<FirebaseFirestore>(() => FirebaseFirestore.instance);
+  gitIt.registerFactory<RemoteProfileDataSource>(
+    () => RemoteProfileDataSource(firestore: gitIt()),
   );
   gitIt.registerFactory<LocalProfileDataSource>(() => LocalProfileDataSource());
+ 
+
   gitIt.registerSingleton<ProfileRepo>(
     ProfileRepoImpl(remoteDataSource: gitIt(), localDataSource: gitIt()),
   );
