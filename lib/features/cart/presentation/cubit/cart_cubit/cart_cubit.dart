@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musa/core/shared/product.dart';
-import 'package:musa/core/shared/product_model.dart';
 import 'package:musa/features/cart/domain/repo/cart_repo.dart';
 part 'cart_state.dart';
 

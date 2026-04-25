@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               IconButton(
                 icon: Icon(LucideIcons.shoppingBag),
                 onPressed: () {
-                  GoRouter.of(context).pushNamed(AppRouters.cartView);
+                  GoRouter.of(context).pushReplacement(AppRouters.cartView);
                 },
               ),
 
@@ -65,7 +65,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           var name = context.read<ProfileCubit>().getName() ?? 'user';
-
           return Row(
             children: [
               CircleAvatar(

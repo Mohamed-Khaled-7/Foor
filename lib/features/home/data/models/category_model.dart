@@ -77,7 +77,7 @@ class CategoryModel {
     );
   }
   CategoryEntitey toEntity() {
-    return CategoryEntitey(title: name, url: image);
+    return CategoryEntitey(title: name, url: image,slug: slug);
   }
 
   Map<String, dynamic> toJson() {

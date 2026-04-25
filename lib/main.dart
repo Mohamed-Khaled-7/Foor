@@ -5,10 +5,10 @@ import 'package:musa/core/const/const.dart';
 import 'package:musa/core/shared/product_model.dart';
 import 'package:musa/core/utils/app_routers.dart';
 import 'package:musa/core/utils/git_it.dart';
-import 'package:musa/features/auth/presentation/cubit/auth/auth_cubit.dart';
 import 'package:musa/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:musa/features/favoriate/presentation/cubit/cubit/favoriate_cubit.dart';
-import 'package:musa/features/home/presentation/cubit/cubit/home_cubit.dart';
+import 'package:musa/features/home/presentation/cubit/cubit/category_cubit.dart';
+import 'package:musa/features/home/presentation/cubit/cubit/products_cubit.dart';
 import 'package:musa/features/profile/data/models/profile_model.dart';
 import 'package:musa/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:musa/firebase_options.dart';
@@ -17,7 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
@@ -38,7 +37,11 @@ class Foor extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => gitIt<HomeCubit>()),
+        BlocProvider(create: (context) => gitIt<ProfileCubit>()),
+        BlocProvider(create: (context) => gitIt<CartCubit>()),
+        BlocProvider(create: (context) => gitIt<FavoriateCubit>()),
+        BlocProvider(create: (context) => gitIt<ProductsCubit>()),
+        BlocProvider(create: (context) => gitIt<CategoryCubit>()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouters.routers,

@@ -18,9 +18,8 @@ class ProfileRepoImpl implements ProfileRepo {
   }
 
   @override
-  String getCurrentUid() {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    return uid ?? '';
+  String? getCurrentUid() {
+    return FirebaseAuth.instance.currentUser?.uid;
   }
 
   @override
@@ -38,9 +37,10 @@ class ProfileRepoImpl implements ProfileRepo {
   }
 
   @override
-  Future<ProfileModel?> getProfile(String uid) async {
+  Future<ProfileModel?> getProfile({required String uid}) async {
     final local = localDataSource.getProfile();
     if (local != null) return local;
+    if (uid.isEmpty) return null;
     final remote = await remoteDataSource.fetchProfile(uid: uid);
     if (remote != null) {
       await localDataSource.saveProfile(remote);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musa/features/home/presentation/cubit/cubit/home_cubit.dart';
+import 'package:musa/features/home/presentation/cubit/cubit/products_cubit.dart';
 import 'package:musa/features/home/presentation/views/widgets/custom_product_card.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -8,13 +8,16 @@ class CustomListProducts extends StatelessWidget {
   const CustomListProducts({super.key});
 
   @override
+ 
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
-        if (state is HomeLoading) {
-          return const Center(child: CircularProgressIndicator());
+        if (state is ProductsLoading) {
+           return const Center(child: Text('Loading....'));
         }
-        if (state is HomeLoaded) {
+        if (state is ProductsLoaded) {
           return GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -31,7 +34,7 @@ class CustomListProducts extends StatelessWidget {
             itemCount: state.products.length,
           );
         }
-        if (state is HomeError) {
+        if (state is ProductsError) {
           return Center(child: Text(state.errMessage));
         } else {
           return Shimmer(

@@ -2,7 +2,7 @@ import 'package:musa/features/profile/data/models/profile_model.dart';
 
 abstract class ProfileRepo {
   // Remote + Local main flow
-  Future<ProfileModel?> getProfile(String uid);
+  Future<ProfileModel?> getProfile({required String uid});
 
   // Local
   ProfileModel? getLocalProfile();
@@ -14,8 +14,6 @@ abstract class ProfileRepo {
   Future<void> updateProfile(String uid, ProfileModel profile);
 
   // Utils
-  String getCurrentUid();
+  String? getCurrentUid();
   String getName();
-
-
 }

@@ -12,8 +12,12 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLoading());
     try {
       final uid = profileRepo.getCurrentUid();
-      final profile = await profileRepo.getProfile(uid);
-      emit(ProfileLoaded(profileModel: profile!));
+      if (uid != null) {
+        final profile = await profileRepo.getProfile(uid: uid);
+        emit(ProfileLoaded(profileModel: profile!));
+      } else {
+        emit(ProfileError(errMessage: 'User Not Found,Please Login First'));
+      }
     } on Exception catch (e) {
       emit(ProfileError(errMessage: e.toString()));
     }
@@ -22,19 +26,28 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> createProfile(ProfileModel profile) async {
     emit(ProfileLoading());
     final uid = profileRepo.getCurrentUid();
-    await profileRepo.createProfile(uid, profile);
-    final newProfile = await profileRepo.getProfile(uid);
-    emit(ProfileLoaded(profileModel: newProfile!));
+    if (uid != null) {
+      await profileRepo.createProfile(uid, profile);
+      final newProfile = await profileRepo.getProfile(uid: uid);
+      emit(ProfileLoaded(profileModel: newProfile!));
+    } else {
+      emit(ProfileError(errMessage: 'User Not Found,Please Login First'));
+    }
   }
 
   Future<void> updateProfile(ProfileModel profile) async {
     emit(ProfileLoading());
     final uid = profileRepo.getCurrentUid();
-    await profileRepo.updateProfile(uid, profile);
-    final updatedProfile = await profileRepo.getProfile(uid);
-    emit(ProfileLoaded(profileModel: updatedProfile!));
+    if (uid != null) {
+      await profileRepo.updateProfile(uid, profile);
+      final updatedProfile = await profileRepo.getProfile(uid:uid);
+      emit(ProfileLoaded(profileModel: updatedProfile!));
+    }else{
+      emit(ProfileError(errMessage: 'User Not Found,Please Login First'));
+    }
   }
-  String? getName(){
+
+  String? getName() {
     return profileRepo.getName();
   }
 }

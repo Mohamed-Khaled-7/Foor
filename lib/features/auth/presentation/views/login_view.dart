@@ -51,7 +51,6 @@ class _LoginPagejState extends State<LoginView> {
                 backgroundColor: Colors.green[700],
                 icons: LucideIcons.checkCircle,
               );
-              context.read<ProfileCubit>().getProfile();
               GoRouter.of(context).push(AppRouters.homeView);
             }
             if (state is AuthError) {

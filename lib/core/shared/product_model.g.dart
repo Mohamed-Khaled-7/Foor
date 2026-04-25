@@ -2,9 +2,14 @@
 
 part of 'product_model.dart';
 
+
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
+
+
+
+
 
 class ProductModelAdapter extends TypeAdapter<ProductModel> {
   @override

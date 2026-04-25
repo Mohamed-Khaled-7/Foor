@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/core/shared/product.dart';
+import 'package:musa/core/utils/app_routers.dart';
 import 'package:musa/core/widgets/customSnakPar.dart';
 import 'package:musa/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:musa/features/cart/presentation/views/widgets/custom_addcard_buttom.dart';
@@ -11,7 +13,7 @@ import 'package:musa/features/favoriate/presentation/cubit/cubit/favoriate_cubit
 class ProductDetailsView extends StatelessWidget {
   const ProductDetailsView({required this.product, super.key});
   final int index = 1;
-   final Product product;
+  final Product product;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +43,9 @@ class ProductDetailsView extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: Colors.white.withValues(alpha: 0.7),
                 child: IconButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    GoRouter.of(context).pushReplacement(AppRouters.homeView);
+                  },
                   icon: const Icon(LucideIcons.arrowLeft, color: Colors.grey),
                 ),
               ),

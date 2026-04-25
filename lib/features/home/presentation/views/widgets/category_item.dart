@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musa/features/home/domain/entites/category.dart';
-import 'package:musa/features/home/presentation/cubit/cubit/home_cubit.dart';
+import 'package:musa/features/home/presentation/cubit/cubit/products_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -13,8 +13,8 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<HomeCubit>().getProductsByCategory(
-          url: categoryEntity.url,
+        context.read<ProductsCubit>().getProductsByCategory(
+          category: categoryEntity.slug,
         );
       },
       child: Padding(

@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/core/shared/product.dart';
-import 'package:musa/features/home/presentation/cubit/cubit/home_cubit.dart';
+import 'package:musa/features/home/presentation/cubit/cubit/products_cubit.dart';
 import 'package:musa/features/home/presentation/views/widgets/custom_product_card.dart';
-
 
 class CustomSearchDelegate extends SearchDelegate {
   Product? product;
@@ -20,14 +19,15 @@ class CustomSearchDelegate extends SearchDelegate {
       icon: Icon(LucideIcons.arrowLeft),
       onPressed: () => {
         close(context, null),
-        context.read<HomeCubit>().getAllProducts(),
+        context.read<ProductsCubit>().getAllProducts(),
       },
     );
   }
+
   @override
   Widget buildResults(BuildContext context) {
-    context.read<HomeCubit>().searchProducts(query:query);
-    return BlocBuilder<HomeCubit, HomeState>(
+    context.read<ProductsCubit>().searchProducts(query: query);
+    return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is SearchLoading) {
           return const Center(

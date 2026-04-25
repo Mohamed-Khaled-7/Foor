@@ -18,11 +18,11 @@ class CartRepoImpl implements CartRepository {
         break;
       }
     }
-    if (existingItem != null) {
+    if (existingItem!.quantity >0) {
       existingItem.quantity += 1;
       cartDataSource.updateCart(existingItem, existingItem.quantity);
     } else{
-      existingItem!.quantity = 1;
+      existingItem.quantity = 1;
       cartDataSource.addToCart(existingItem);
     }
   }

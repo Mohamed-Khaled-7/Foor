@@ -1,8 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:musa/core/shared/product.dart';
-
 part 'product_model.g.dart';
-
 @HiveType(typeId: 0)
 class ProductModel extends HiveObject {
   @HiveField(0)
@@ -23,6 +21,7 @@ class ProductModel extends HiveObject {
   final String description;
   @HiveField(8)
   int quantity;
+
   ProductModel({
     this.quantity = 1,
     required this.description,
@@ -34,6 +33,8 @@ class ProductModel extends HiveObject {
     required this.thumbnail,
     required this.category,
   });
+
+  // ✅ تصحيح الـ Entity Conversion
   Product toEntity() {
     return Product(
       quantity: quantity,
@@ -48,28 +49,32 @@ class ProductModel extends HiveObject {
     );
   }
 
+  // ✅ تصحيح الـ fromEntity عشان ميضربش Casting
   factory ProductModel.fromEntity(Product entity) {
     return ProductModel(
       category: entity.category,
       id: entity.id,
       title: entity.title,
-      price: entity.price,
-      rating: entity.rating as double,
+      price: entity.price.toDouble(),
+      rating: entity.rating.toDouble(), // استخدم .toDouble() مش as double
       thumbnail: entity.image,
-      discountPercentage: entity.discountPercentage,
+      discountPercentage: entity.discountPercentage.toDouble(),
       description: entity.description,
+      quantity: entity.quantity.toInt(), // تأكد من تحويلها لـ int
     );
   }
+
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      description: json['description'],
-      discountPercentage: (json['discountPercentage'] as num).toDouble(),
-      id: json['id'],
-      title: json['title'],
-      price: (json['price'] as num).toDouble(),
-      rating: (json['rating'] as num).toDouble(),
-      thumbnail: json['thumbnail'],
-      category: json['category'],
+      description: json['description'] ?? '',
+      discountPercentage: (json['discountPercentage'] as num? ?? 0).toDouble(),
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      price: (json['price'] as num? ?? 0).toDouble(),
+      rating: (json['rating'] as num? ?? 0).toDouble(),
+      thumbnail: json['thumbnail'] ?? '',
+      category: json['category'] ?? '',
+      quantity: (json['quantity'] as num? ?? 1).toInt(),
     );
   }
 }

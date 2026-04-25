@@ -7,6 +7,9 @@ class RemoteProfileDataSource {
   RemoteProfileDataSource({required this.firestore});
 
   Future<ProfileModel?> fetchProfile({required String uid}) async {
+    if (uid.isEmpty) {
+      throw Exception('uid can\'t be empty');
+    }
     try {
       DocumentSnapshot doc = await firestore.collection('users').doc(uid).get();
       if (doc.exists) {

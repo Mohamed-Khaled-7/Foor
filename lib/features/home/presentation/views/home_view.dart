@@ -1,41 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musa/features/cart/presentation/views/widgets/customAppBar.dart';
-import 'package:musa/features/home/presentation/cubit/cubit/home_cubit.dart';
+import 'package:musa/features/home/presentation/cubit/cubit/products_cubit.dart';
 import 'package:musa/features/home/presentation/views/widgets/categories_list.dart';
 import 'package:musa/features/home/presentation/views/widgets/customHeader.dart';
 import 'package:musa/features/home/presentation/views/widgets/customSearchField.dart';
 import 'package:musa/features/home/presentation/views/widgets/custom_list_products.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
-
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: Column(
         children: [
-          CustomSearch(),
+          const CustomSearch(),
           Expanded(
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                SizedBox(height: 18),
-                CustomHeader(title: 'Categories'),
+                const SizedBox(height: 18),
+                const CustomHeader(title: 'Categories'),
                 SizedBox(height: 16),
-                CategoryList(),
-                SizedBox(height: 23),
-                CustomHeader(title: 'Products'),
-                BlocBuilder<HomeCubit, HomeState>(
+                const CategoryList(),
+                const SizedBox(height: 23),
+                const CustomHeader(title: 'Products'),
+                BlocBuilder<ProductsCubit, ProductsState>(
                   builder: (context, state) {
-                    return CustomListProducts();
+                    return const CustomListProducts();
                   },
                 ),
               ],
