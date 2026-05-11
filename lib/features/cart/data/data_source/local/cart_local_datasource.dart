@@ -6,6 +6,7 @@ import 'package:musa/core/shared/product_model.dart';
 class CartLocalDataSource {
   var cartBox = Hive.box<ProductModel>(CartBox);
 
+
   void addToCart(ProductModel productModel) {
     productModel.quantity = 1;
     ProductModel newProduct = ProductModel(

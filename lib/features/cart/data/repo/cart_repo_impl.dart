@@ -18,7 +18,6 @@ class CartRepoImpl implements CartRepository {
     final existingItem = items.firstWhereOrNull(
       (item) => item.id == product.id,
     );
-
     if (existingItem != null) {
       existingItem.quantity += 1;
       cartDataSource.updateCart(existingItem, existingItem.quantity);
