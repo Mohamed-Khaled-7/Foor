@@ -21,7 +21,6 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
   Hive.registerAdapter(ProfileModelAdapter());
-
   await Hive.openBox<ProductModel>(FavoritesBox);
   await Hive.openBox<ProductModel>(CartBox);
   await Hive.openBox<ProfileModel>(ProfileBox);

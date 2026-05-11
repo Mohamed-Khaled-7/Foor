@@ -5,7 +5,7 @@ sealed class FavoriateState {}
 final class FavoriateInitial extends FavoriateState {}
 
 final class FavoriateLoaded extends FavoriateState {
-  final List products;
+  final List<Product> products;
   FavoriateLoaded({required this.products});
 }
 

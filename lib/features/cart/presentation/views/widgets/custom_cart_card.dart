@@ -22,7 +22,7 @@ class CustomCartCard extends StatelessWidget {
       padding: const EdgeInsets.all(11.0),
       child: GestureDetector(
         onTap: () {
-          GoRouter.of(context).pushReplacement(
+          GoRouter.of(context).pushNamed(
             AppRouters.productDetailsView,
             extra: product,
           );

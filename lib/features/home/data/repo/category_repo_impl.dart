@@ -3,12 +3,12 @@ import 'package:musa/features/home/data/models/category_model.dart';
 import 'package:musa/features/home/domain/entites/category.dart';
 import 'package:musa/features/home/domain/repo/categorey_repo.dart';
 
-class CategoryRepoImpl implements CategoreyRepo{
+class CategoryRepoImpl implements CategoreyRepo {
   final CategoryRemoteDataSource remoteDS;
 
-  CategoryRepoImpl(this.remoteDS);
+  CategoryRepoImpl({required this.remoteDS});
   @override
-      Future<List<CategoryEntitey>> getAllCategories() async {
+  Future<List<CategoryEntitey>> getAllCategories() async {
     final categories = await remoteDS.getAllCategories();
     return categories
         .map<CategoryEntitey>(
@@ -16,5 +16,4 @@ class CategoryRepoImpl implements CategoreyRepo{
         )
         .toList();
   }
-
 }

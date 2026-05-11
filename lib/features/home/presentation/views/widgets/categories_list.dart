@@ -12,7 +12,7 @@ class CategoryList extends StatelessWidget {
     return BlocBuilder<CategoryCubit, CategoryState>(
       builder: (context, state) {
         if (state is CategoryLoading) {
-          return const Center(child: Text('Loading....'));
+          return  Center(child: Text('Loading....',style: GoogleFonts.poppins(fontSize: 15),));
         } else if (state is CategoryLoaded) {
           return SizedBox(
             height: 130,

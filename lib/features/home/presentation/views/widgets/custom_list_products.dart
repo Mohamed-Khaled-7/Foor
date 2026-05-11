@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:musa/features/home/presentation/cubit/cubit/products_cubit.dart';
 import 'package:musa/features/home/presentation/views/widgets/custom_product_card.dart';
 import 'package:shimmer/shimmer.dart';
@@ -8,14 +9,17 @@ class CustomListProducts extends StatelessWidget {
   const CustomListProducts({super.key});
 
   @override
- 
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is ProductsLoading) {
-           return const Center(child: Text('Loading....'));
+          return Center(
+            child: Text(
+              'Loading....',
+              style: GoogleFonts.poppins(fontSize: 15),
+            ),
+          );
         }
         if (state is ProductsLoaded) {
           return GridView.builder(

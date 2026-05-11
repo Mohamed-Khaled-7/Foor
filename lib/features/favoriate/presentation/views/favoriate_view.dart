@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/core/const/const.dart';
-import 'package:musa/core/shared/product.dart';
+import 'package:musa/core/shared/product_model.dart';
 import 'package:musa/features/favoriate/presentation/views/widgets/custom_cart.dart';
 
 class FavoriateView extends StatelessWidget {
@@ -21,8 +21,8 @@ class FavoriateView extends StatelessWidget {
         ),
       ),
       body: ValueListenableBuilder(
-        valueListenable: Hive.box<Product>(FavoritesBox).listenable(),
-        builder: (context, Box<Product> box, _) {
+        valueListenable: Hive.box<ProductModel>(FavoritesBox).listenable(),
+        builder: (context, Box<ProductModel> box, _) {
           if (box.values.isEmpty) {
             return Center(
               child: Text(
@@ -35,7 +35,8 @@ class FavoriateView extends StatelessWidget {
               itemCount: box.values.length,
               itemBuilder: (context, index) {
                 final favoriteItem = box.values.toList()[index];
-                return CustomFavoriateCard(product: favoriteItem);
+                final products = favoriteItem.toEntity();
+                return CustomFavoriateCard(product: products);
               },
             );
           }

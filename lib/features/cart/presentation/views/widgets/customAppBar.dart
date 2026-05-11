@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               IconButton(
                 icon: Icon(LucideIcons.shoppingBag),
                 onPressed: () {
-                  GoRouter.of(context).pushReplacement(AppRouters.cartView);
+                  GoRouter.of(context).pushNamed(AppRouters.cartView);
                 },
               ),
 

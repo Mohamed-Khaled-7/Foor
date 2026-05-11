@@ -44,7 +44,7 @@ class ProductDetailsView extends StatelessWidget {
                 backgroundColor: Colors.white.withValues(alpha: 0.7),
                 child: IconButton(
                   onPressed: () {
-                    GoRouter.of(context).pushReplacement(AppRouters.homeView);
+                    GoRouter.of(context).pushNamed(AppRouters.homeView);
                   },
                   icon: const Icon(LucideIcons.arrowLeft, color: Colors.grey),
                 ),

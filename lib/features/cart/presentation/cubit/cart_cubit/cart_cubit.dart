@@ -9,10 +9,11 @@ class CartCubit extends Cubit<CartState> {
   void fetchAllCarts() {
     emit(CartLoading());
     final items = cartRepository.fetchAllCarts();
-    if (items.isEmpty) {
+    final products = items.map<Product>((e) => e.toEntity()).toList();
+    if (products.isEmpty) {
       emit(CartEmpty());
     } else {
-      emit(CartLoaded(cartItems: items));
+      emit(CartLoaded(cartItems: products));
     }
   }
 

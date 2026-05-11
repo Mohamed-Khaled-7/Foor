@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:musa/core/shared/product.dart';
 import 'package:musa/features/cart/data/data_source/local/cart_local_datasource.dart';
-import 'package:musa/features/cart/data/repo/repo_impl.dart';
+import 'package:musa/features/cart/data/repo/cart_repo_impl.dart';
 import 'package:musa/features/cart/domain/repo/cart_repo.dart';
 import 'package:musa/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:musa/features/favoriate/data/data_source/local/favoriate_local.dart';
@@ -50,7 +50,7 @@ void setup() {
     () => CategoryRemoteDataSource(),
   );
   gitIt.registerFactory<CategoreyRepo>(
-    () => CategoryRepoImpl(gitIt<CategoryRemoteDataSource>()),
+    () => CategoryRepoImpl(remoteDS: gitIt<CategoryRemoteDataSource>()),
   );
   gitIt.registerFactory<CategoryCubit>(
     () => CategoryCubit(repo: gitIt<CategoreyRepo>())..getAllCategories(),

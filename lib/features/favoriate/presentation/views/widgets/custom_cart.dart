@@ -21,7 +21,7 @@ class CustomFavoriateCard extends StatelessWidget {
         onTap: () {
           GoRouter.of(
             context,
-          ).pushReplacement(AppRouters.productDetailsView, extra: product);
+          ).pushNamed(AppRouters.productDetailsView, extra: product);
         },
         child: Container(
           decoration: BoxDecoration(

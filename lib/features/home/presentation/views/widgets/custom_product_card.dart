@@ -20,7 +20,7 @@ class CustomCard extends StatelessWidget {
         onTap: () {
           GoRouter.of(
             context,
-          ).push( AppRouters.productDetailsView, extra: product);
+          ).pushNamed( AppRouters.productDetailsView, extra: product);
         },
         child: Container(
           decoration: BoxDecoration(
