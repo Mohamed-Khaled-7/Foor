@@ -6,7 +6,6 @@ import 'package:musa/core/shared/product_model.dart';
 class CartLocalDataSource {
   var cartBox = Hive.box<ProductModel>(CartBox);
 
-
   void addToCart(ProductModel productModel) {
     productModel.quantity = 1;
     ProductModel newProduct = ProductModel(
@@ -21,6 +20,7 @@ class CartLocalDataSource {
     );
     cartBox.put(newProduct.id, newProduct);
   }
+
   void delete(ProductModel productModel) {
     if (cartBox.containsKey(productModel.id)) {
       cartBox.delete(productModel.id);
@@ -35,7 +35,8 @@ class CartLocalDataSource {
   double getTotalPrice() {
     double totalPrice = 0;
     for (var item in cartBox.values) {
-      totalPrice += (item.price * (item.quantity));
+      final discounted = item.price * (1 - item.discountPercentage / 100);
+      totalPrice += discounted * item.quantity;
     }
     return totalPrice;
   }
@@ -44,9 +45,11 @@ class CartLocalDataSource {
     var cartItems = cartBox.values.toList();
     return cartItems;
   }
+
   String getItemCount() {
     return cartBox.length.toString();
   }
+
   int getItemQuntity(ProductModel productModel) {
     if (cartBox.containsKey(productModel.id)) {
       return cartBox.get(productModel.id)!.quantity;
