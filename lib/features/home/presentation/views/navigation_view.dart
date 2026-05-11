@@ -8,7 +8,6 @@ import 'package:musa/features/profile/presentation/views/profile_view.dart';
 
 class NavigationView extends StatefulWidget {
   const NavigationView({super.key});
-  static String id = 'NavigationView';
   @override
   State<NavigationView> createState() => _NavigationViewState();
 }

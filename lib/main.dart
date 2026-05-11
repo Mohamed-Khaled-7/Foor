@@ -5,6 +5,7 @@ import 'package:musa/core/const/const.dart';
 import 'package:musa/core/shared/product_model.dart';
 import 'package:musa/core/utils/app_routers.dart';
 import 'package:musa/core/utils/git_it.dart';
+import 'package:musa/features/auth/presentation/cubit/auth/auth_cubit.dart';
 import 'package:musa/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:musa/features/favoriate/presentation/cubit/cubit/favoriate_cubit.dart';
 import 'package:musa/features/home/presentation/cubit/cubit/category_cubit.dart';
@@ -41,6 +42,7 @@ class Foor extends StatelessWidget {
         BlocProvider(create: (context) => gitIt<FavoriateCubit>()),
         BlocProvider(create: (context) => gitIt<ProductsCubit>()),
         BlocProvider(create: (context) => gitIt<CategoryCubit>()),
+        BlocProvider(create: (context)=> gitIt<AuthCubit>()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouters.routers,

@@ -7,8 +7,6 @@ import 'package:shimmer/shimmer.dart';
 
 class CustomListProducts extends StatelessWidget {
   const CustomListProducts({super.key});
-
-  @override
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsCubit, ProductsState>(

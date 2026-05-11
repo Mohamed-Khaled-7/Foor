@@ -99,13 +99,11 @@ class _SplashViewState extends State<SplashView>
                       bool seen = box.get('isFirstTime', defaultValue: true);
                       var user = FirebaseAuth.instance.currentUser;
                       if (seen) {
-                        GoRouter.of(
-                          context,
-                        ).pushReplacement(AppRouters.onBoardingView);
+                        GoRouter.of(context).push(AppRouters.onBoardingView);
                       } else if (user != null) {
-                        GoRouter.of(context).pushReplacement(AppRouters.homeView);
+                        GoRouter.of(context).push(AppRouters.navigationView);
                       } else {
-                        GoRouter.of(context).pushReplacement(AppRouters.loginView);
+                        GoRouter.of(context).push(AppRouters.loginView);
                       }
                     });
                   },

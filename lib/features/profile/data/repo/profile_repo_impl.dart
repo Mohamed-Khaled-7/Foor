@@ -38,15 +38,13 @@ class ProfileRepoImpl implements ProfileRepo {
 
   @override
   Future<ProfileModel?> getProfile({required String uid}) async {
-    final local = localDataSource.getProfile();
-    if (local != null) return local;
     if (uid.isEmpty) return null;
     final remote = await remoteDataSource.fetchProfile(uid: uid);
     if (remote != null) {
       await localDataSource.saveProfile(remote);
       return remote;
     }
-    return null;
+    return localDataSource.getProfile();
   }
 
   @override

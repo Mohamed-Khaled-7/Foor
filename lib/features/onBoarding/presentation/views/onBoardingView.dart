@@ -7,14 +7,13 @@ import 'package:musa/core/utils/app_routers.dart';
 import 'package:musa/features/onBoarding/data/models/onBoarding.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({super.key});
-  static String id = 'OnBoardingScreen';
+class OnBoardingView extends StatefulWidget {
+  const OnBoardingView({super.key});
   @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+  State<OnBoardingView> createState() => _OnBoardingViewState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
+class _OnBoardingViewState extends State<OnBoardingView> {
   PageController pageController = PageController();
   int currentIndex = 0;
   List<OnboardingModel> pageList = [
@@ -37,6 +36,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       image: 'assets/images/thridOnBoard.png',
     ),
   ];
+  @override 
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +97,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         box.put('isFirstTime', false);
                         GoRouter.of(
                           context,
-                        ).pushReplacement(AppRouters.registerView);
+                        ).push(AppRouters.registerView);
                       } else {
                         pageController.nextPage(
                           duration: const Duration(milliseconds: 500),

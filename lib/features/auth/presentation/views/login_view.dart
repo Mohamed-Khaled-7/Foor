@@ -5,16 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:musa/core/utils/app_routers.dart';
 import 'package:musa/features/auth/presentation/cubit/auth/auth_cubit.dart';
-import 'package:musa/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:musa/presentation/widget/customButton.dart';
 import 'package:musa/presentation/widget/customShowDialog.dart';
 import 'package:musa/presentation/widget/customSnakPar.dart';
 import 'package:musa/presentation/widget/customTextFormField.dart';
-
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
-  static String id = 'LoginPage';
-
   @override
   State<LoginView> createState() => _LoginPagejState();
 }

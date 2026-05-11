@@ -8,8 +8,6 @@ import 'package:musa/features/cart/presentation/views/widgets/customCartButton.d
 
 class CartView extends StatefulWidget {
   const CartView({super.key});
-  static final id = 'BageView';
-
   @override
   State<CartView> createState() => _CartViewState();
 }

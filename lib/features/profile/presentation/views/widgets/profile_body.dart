@@ -9,7 +9,6 @@ import 'package:musa/features/profile/data/models/profile_model.dart';
 import 'package:musa/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:musa/presentation/widget/customTextFormField.dart';
 
-
 class ProfileBody extends StatefulWidget {
   const ProfileBody({super.key, required this.profile});
   final ProfileModel profile;
@@ -47,23 +46,20 @@ class _ProfileBodyState extends State<ProfileBody> {
   Widget build(BuildContext context) {
     return BlocListener<ProfileCubit, ProfileState>(
       listener: (context, state) {
-        if(state is ProfileError)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errMessage)),
-          );
+        if (state is ProfileError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errMessage)));
         }
-        if(state is ProfileLoaded)
-        {
+        if (state is ProfileLoaded) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Profile updated successfully!')),
           );
         }
-        if(state is ProfileLoading)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Updating profile...')),
-          );
+        if (state is ProfileLoading) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Updating profile...')));
         }
       },
       child: ListView(

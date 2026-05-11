@@ -215,7 +215,6 @@ class _RegisterViewState extends State<RegisterView> {
                           email: email!,
                           password: password!,
                         );
-                        Navigator.pop(context);
                       }
                     },
                   ),
@@ -232,7 +231,8 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => GoRouter.of(context).push(AppRouters.loginView),
+                      onTap: () =>
+                          GoRouter.of(context).push(AppRouters.loginView),
                       child: Text(
                         'Login',
                         style: GoogleFonts.poppins(

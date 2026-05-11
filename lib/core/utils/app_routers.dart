@@ -11,6 +11,7 @@ import 'package:musa/features/favoriate/presentation/views/favoriate_view.dart';
 import 'package:musa/features/home/presentation/views/home_view.dart';
 import 'package:musa/features/home/presentation/views/navigation_view.dart';
 import 'package:musa/features/home/presentation/views/product_details_view.dart';
+import 'package:musa/features/onBoarding/presentation/views/onBoardingView.dart';
 import 'package:musa/features/profile/presentation/views/profile_view.dart';
 import 'package:musa/features/splash/presentation/views/splash_view.dart';
 
@@ -27,15 +28,17 @@ class AppRouters {
   static const String onBoardingView = '/OnBoardingView';
   static final routers = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => NavigationView()),
       GoRoute(
-        path: loginView,
-        builder: (context, state) => BlocProvider(
-          create: (context) => AuthCubit(authRepo: gitIt<AuthRepo>()),
-          child: LoginView(),
-        ),
+        path: navigationView,
+        builder: (context, state) => NavigationView(),
       ),
+      GoRoute(path: '/', builder: (context, state) => SplashView()),
+      GoRoute(path: loginView, builder: (context, state) => LoginView()),
       GoRoute(path: registerView, builder: (context, state) => RegisterView()),
+      GoRoute(
+        path: onBoardingView,
+        builder: (context, state) => OnBoardingView(),
+      ),
       GoRoute(path: homeView, builder: (context, state) => HomeView()),
       GoRoute(path: cartView, builder: (context, state) => CartView()),
       GoRoute(path: profileView, builder: (context, state) => ProfileView()),
@@ -43,7 +46,6 @@ class AppRouters {
         path: favoriateView,
         builder: (context, state) => FavoriateView(),
       ),
-      GoRoute(path: splashView, builder: (context, state) => SplashView()),
       GoRoute(
         path: productDetailsView,
         builder: (context, state) {
