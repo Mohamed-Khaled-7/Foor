@@ -1,9 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:musa/core/shared/product.dart';
-import 'package:musa/core/utils/git_it.dart';
-import 'package:musa/features/auth/domain/repo/auth_repo.dart';
-import 'package:musa/features/auth/presentation/cubit/auth/auth_cubit.dart';
 import 'package:musa/features/auth/presentation/views/login_view.dart';
 import 'package:musa/features/auth/presentation/views/register_view.dart';
 import 'package:musa/features/cart/presentation/views/cart_view.dart';
@@ -12,10 +8,12 @@ import 'package:musa/features/home/presentation/views/home_view.dart';
 import 'package:musa/features/home/presentation/views/navigation_view.dart';
 import 'package:musa/features/home/presentation/views/product_details_view.dart';
 import 'package:musa/features/onBoarding/presentation/views/onBoardingView.dart';
+import 'package:musa/features/payment/presentation/views/widgets/payment_details_screen.dart';
 import 'package:musa/features/profile/presentation/views/profile_view.dart';
 import 'package:musa/features/splash/presentation/views/splash_view.dart';
 
 class AppRouters {
+  static const String paymentView = '/PaymentView';
   static const String navigationView = '/NavigationView';
   static const String loginView = '/LoginView';
   static const String registerView = '/RegisterView';
@@ -45,6 +43,10 @@ class AppRouters {
       GoRoute(
         path: favoriateView,
         builder: (context, state) => FavoriateView(),
+      ),
+      GoRoute(
+        path: paymentView,
+        builder: (context, state) => PaymentDetailsScreen(),
       ),
       GoRoute(
         path: productDetailsView,

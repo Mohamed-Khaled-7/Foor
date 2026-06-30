@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:musa/core/utils/app_routers.dart';
 import 'package:musa/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:musa/features/cart/presentation/views/widgets/cart_body.dart';
 import 'package:musa/features/cart/presentation/views/widgets/customCartButton.dart';
@@ -39,7 +41,9 @@ class _CartViewState extends State<CartView> {
               text: 'Checkout',
               totalPrice: context.read<CartCubit>().totalPrice(),
               color: 0xFF000000,
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push(AppRouters.paymentView);
+              },
             );
           },
         ),
